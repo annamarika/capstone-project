@@ -36,7 +36,7 @@ const ProductContainer = styled.div`
 
 const ImageWrapper = styled.div`
 	background: blue;
-	width: 200%;
+	width: 250%;
 	height: 386px;
 	position: relative;
 	object-fit: cover;
