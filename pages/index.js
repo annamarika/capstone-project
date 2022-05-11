@@ -12,10 +12,5 @@ export function getStaticProps() {
 }
 
 export default function Home({ products }) {
-	return (
-		<>
-			<h1>Product</h1>
-			<Product products={products} />
-		</>
-	);
+	return <Product products={products} />;
 }
