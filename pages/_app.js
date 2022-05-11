@@ -12,32 +12,23 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 
 const GlobalStyle = createGlobalStyle`
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+html {
+    font-size: 62.5%;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-	background-color: #E2CADF;
-}
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  body {
+	  
+    background-color: #E2CADF;
+    
+    font-size: 1.5rem;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-form {
-display: flex;
-
-flex-direction: column;
-gap: 10px;
-margin: 30px;
-
-}
 `;

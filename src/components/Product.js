@@ -16,7 +16,7 @@ export default function Product({ products }) {
 }
 
 const ProductContainer = styled.div`
-	background-color: blue;
+	background-color: white;
 	width: 384px;
 	height: 436;
 	padding: 20px 0 20px 20px;
