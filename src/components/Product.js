@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-export default function Product({ product }) {
+export default function Product({ products }) {
 	return (
 		<>
-			<Image src={product.image} alt="dress" width={3456} height={5184} />
-			<p>{product.detail}</p>
+			<Image src="/test.jpg" alt="dress" width={3456} height={5184} />
+			<p>{products.detail}</p>
 			<address>
-				<p>{product.email}</p>
+				<p>{products.email}</p>
 			</address>
 		</>
 	);
