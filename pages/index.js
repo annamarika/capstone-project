@@ -1,5 +1,5 @@
 import { getProducts } from '../src/services/get-products';
-import Product from '../src/components/Product';
+import Product from '../src/components/Product/Product';
 import styled from 'styled-components';
 
 export function getStaticProps() {
