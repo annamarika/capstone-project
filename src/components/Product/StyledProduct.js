@@ -19,7 +19,7 @@ const ImageWrapper = styled.div`
 	border: 3px solid #4b587f;
 `;
 
-const Article = styled.div`
+const TextWrapper = styled.article`
 	margin: 13px;
 	display: flex;
 	flex-direction: column;
@@ -33,4 +33,4 @@ const ProductDetail = styled.p`
 	border-bottom: solid 3px #db6c4c;
 `;
 
-export { Container, ImageWrapper, Article, ProductDetail };
+export { Container, ImageWrapper, TextWrapper, ProductDetail };

@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('ProductPage', () => {
-	it('should render one Button, a text and an image', () => {
+	it('renders one Button, a text and an image', () => {
 		render(
 			<Product
 				products={{
