@@ -16,9 +16,8 @@ export default {
 	],
 };
 
-const props = { props: { email: 'hallo@hallo.de' } };
 const ButtonText = 'Email';
 
 export function Default() {
-	return <EmailButton {...props}>{ButtonText}</EmailButton>;
+	return <EmailButton>{ButtonText}</EmailButton>;
 }

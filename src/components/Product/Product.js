@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { ProductContainer, ImageWrapper, ProductArticle, ProductDetail } from './StyledProduct';
+import { Container, ImageWrapper, Article, ProductDetail } from './StyledProduct';
 import EmailButton from '../Button/StyledButton';
 
 export default function Product({ products }) {
 	return (
-		<ProductContainer>
+		<Container>
 			<ImageWrapper>
 				<Image
 					src="/test.jpg"
@@ -15,12 +15,12 @@ export default function Product({ products }) {
 					objectFit="cover"
 				/>
 			</ImageWrapper>
-			<ProductArticle>
+			<Article>
 				<ProductDetail>{products.detail}</ProductDetail>
 				<EmailButton>
 					<p>{products.email}</p>
 				</EmailButton>
-			</ProductArticle>
-		</ProductContainer>
+			</Article>
+		</Container>
 	);
 }

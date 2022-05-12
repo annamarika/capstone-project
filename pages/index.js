@@ -20,10 +20,9 @@ export default function Home({ products }) {
 	);
 }
 
-const PageContainer = styled.div`
+const PageContainer = styled.ul`
 	margin: 22px;
 	display: flex;
-	flex-direction: row;
 	flex-wrap: wrap;
 	justify-items: center;
 	align-items: center;

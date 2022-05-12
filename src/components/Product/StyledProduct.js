@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ProductContainer = styled.div`
+const Container = styled.li`
 	background-color: white;
 	max-width: 384px;
 	max-height: 436px;
@@ -19,7 +19,7 @@ const ImageWrapper = styled.div`
 	border: 3px solid #4b587f;
 `;
 
-const ProductArticle = styled.div`
+const Article = styled.div`
 	margin: 13px;
 	display: flex;
 	flex-direction: column;
@@ -33,4 +33,4 @@ const ProductDetail = styled.p`
 	border-bottom: solid 3px #db6c4c;
 `;
 
-export { ProductContainer, ImageWrapper, ProductArticle, ProductDetail };
+export { Container, ImageWrapper, Article, ProductDetail };
