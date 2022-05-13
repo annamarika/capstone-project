@@ -2,13 +2,13 @@ import Image from 'next/image';
 import { Container, ImageWrapper, TextWrapper, ProductDetail } from './StyledProduct';
 import EmailButton from '../Button/StyledButton';
 
-export default function Product({ products }) {
+export default function Product({ detail, email, image, altText }) {
 	return (
 		<Container>
 			<ImageWrapper>
 				<Image
-					src="/test.jpg"
-					alt="dress"
+					src={image}
+					alt={altText}
 					width={3456}
 					height={5184}
 					layout="fill"
@@ -16,8 +16,8 @@ export default function Product({ products }) {
 				/>
 			</ImageWrapper>
 			<TextWrapper>
-				<ProductDetail>{products.detail}</ProductDetail>
-				<EmailButton>{products.email}</EmailButton>
+				<ProductDetail>{detail}</ProductDetail>
+				<EmailButton>{email}</EmailButton>
 			</TextWrapper>
 		</Container>
 	);
