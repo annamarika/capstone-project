@@ -1,6 +1,26 @@
-{
-  "id": "1234",
-  "detail": "Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. ",
-  "image": "https://unsplash.com/photos/sg_gRhbYXhc",
-  "email": "hallo@hallo.de"
-}
+[
+  {
+    "id": "1234",
+    "detail": "Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. ",
+    "image": "https://unsplash.com/photos/sg_gRhbYXhc",
+    "email": "hallo@hallo.de"
+  },
+  {
+    "id": "1235",
+    "detail": "LV bag. Perfect as Clutch or Shoulderbag. brand new. Brand LV. Munich. ",
+    "image": "https://unsplash.com/photos/5ABk8BTqdLE",
+    "email": "hey@hallo.de"
+  },
+  {
+    "id": "1236",
+    "detail": "Green velvet nike Shoes. Trendy. Worn. Size 40. Brand Nike. Berlin. ",
+    "image": "https://unsplash.com/photos/ad_0wMHtvlU",
+    "email": "Bonjours@hallo.de"
+  },
+  {
+    "id": "1237",
+    "detail": "Golden Bracelet. Posh. granny old but still nice. Brand unknown. Hamburg. ",
+    "image": "https://unsplash.com/photos/onU-LlrPs8I",
+    "email": "moin@hallo.de"
+  }
+]
