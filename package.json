@@ -11,8 +11,8 @@
     "prettier:write": "npx prettier --write .",
     "eslint": "npx eslint \"**/*.js\"",
     "prepare": "husky install",
-    "storybook": "start-storybook -p 6006 --no-manager-cache",
-    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "build-storybook": "build-storybook -s public",
     "test": "jest --env=jsdom",
     "test:watch": "jest --env=jsdom --watch"
   },

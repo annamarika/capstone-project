@@ -1,24 +1,15 @@
 import Product from './Product';
-import styled from 'styled-components';
+import UList from '../UI/StyledUList';
+import ProductLi from '../UI/StyledList';
 
 export default function ProductGrid({ products }) {
 	return (
-		<ProductUl>
+		<UList>
 			{products.map(product => (
 				<ProductLi key={product.id}>
 					<Product detail={product.detail} email={product.email} image={product.image} />
 				</ProductLi>
 			))}
-		</ProductUl>
+		</UList>
 	);
 }
-
-const ProductUl = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-`;
-
-const ProductLi = styled.li`
-	list-style: none;
-`;

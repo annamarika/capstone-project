@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
-import EmailButton from './StyledButton';
+import DefaultButton from '../UI/StyledButton';
 
 export default {
 	title: 'Components/Button',
-	component: EmailButton,
+	component: DefaultButton,
 	decorators: [
 		Story => {
 			return (
@@ -19,5 +19,5 @@ export default {
 const ButtonText = 'Email';
 
 export function Default() {
-	return <EmailButton>{ButtonText}</EmailButton>;
+	return <DefaultButton>{ButtonText}</DefaultButton>;
 }

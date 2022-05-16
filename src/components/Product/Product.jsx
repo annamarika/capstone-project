@@ -1,6 +1,9 @@
 import Image from 'next/image';
-import { Container, ImageWrapper, TextWrapper, ProductDetail } from './StyledProduct';
-import EmailButton from '../Button/StyledButton';
+import Typography from '../UI/Typography';
+import Container from '../UI/StyledContainer';
+import ImageWrapper from '../UI/StyledImageWrapper';
+import TextWrapper from '../UI/StyledTextWrapper';
+import DefaultButton from '../UI/StyledButton';
 
 export default function Product({ detail, email, image, altText }) {
 	return (
@@ -16,8 +19,8 @@ export default function Product({ detail, email, image, altText }) {
 				/>
 			</ImageWrapper>
 			<TextWrapper>
-				<ProductDetail>{detail}</ProductDetail>
-				<EmailButton>{email}</EmailButton>
+				<Typography variant="p">{detail}</Typography>
+				<DefaultButton>{email}</DefaultButton>
 			</TextWrapper>
 		</Container>
 	);
