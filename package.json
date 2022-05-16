@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 --no-manager-cache",
     "build-storybook": "build-storybook",
-    "test": "jest --watch"
+    "test": "jest --env=jsdom",
+    "test:watch": "jest --env=jsdom --watch"
   },
   "dependencies": {
     "next": "12.1.6",
