@@ -19,12 +19,12 @@ const props = {
 	products: {
 		id: '1234',
 		detail: 'Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. ',
-		image: '../../public/test.jpg',
+		image: '/test.jpg',
 		altText: 'dress',
 		email: 'hallo@hallo.de',
 	},
 };
 
 export function OneProduct() {
-	return <Product {...props} />;
+	return <Product {...props.products} />;
 }
