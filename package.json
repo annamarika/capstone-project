@@ -11,8 +11,8 @@
     "prettier:write": "npx prettier --write .",
     "eslint": "npx eslint \"**/*.js\"",
     "prepare": "husky install",
-    "storybook": "start-storybook -p 6006 --no-manager-cache",
-    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 6006 -s ./public",
+    "build-storybook": "build-storybook -s public",
     "test": "jest --env=jsdom",
     "test:watch": "jest --env=jsdom --watch"
   },
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.4.22",

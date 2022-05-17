@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const EmailButton = styled.button`
+const DefaultButton = styled.button`
 	text-transform: uppercase;
-	color: white;
-	background-color: #db6c4c;
+	color: var(--text-color-light);
+	background-color: var(--button-bg-color);
 	border-radius: 19px;
 	border: none;
 	display: flex;
@@ -11,4 +11,4 @@ const EmailButton = styled.button`
 	padding: 7px 13px;
 `;
 
-export default EmailButton;
+export default DefaultButton;

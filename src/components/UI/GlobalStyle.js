@@ -16,6 +16,16 @@ html {
     background-color: #E2CADF;
     font-size: 1.5rem;
   }
+  
+  :root {
+    --main-bg-color: #E2CADF;
+    --main-bg-color-dark: #4B587F;
+    --text-color-light: #ffffff;
+    --text-color-dark: #4B587F;
+    --button-bg-color: #DB6C4C;
+      }
+
+
 
 `;
 
