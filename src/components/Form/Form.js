@@ -40,6 +40,14 @@ export default function Form({ onAddProduct }) {
 				})}
 				placeholder="Add important details"
 			/>
+			<label htmlFor="email">email</label>
+			<input
+				type="text"
+				aria-invalid={errors.name ? 'true' : 'false'}
+				{...register('email', {
+					required: 'please add your email',
+				})}
+			/>
 			<button type="submit">create</button>
 		</form>
 	);

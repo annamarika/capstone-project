@@ -1,6 +1,8 @@
 import { getProducts } from '../src/services/get-products';
 import ProductGrid from '../src/components/Product/ProductGrid';
+import React, { useState } from 'react';
 import Form from '../src/components/Form/Form';
+import { nanoid } from 'nanoid';
 
 export function getStaticProps() {
 	const products = getProducts();
@@ -12,11 +14,26 @@ export function getStaticProps() {
 	};
 }
 
-export default function Home({ products }) {
+export default function Home() {
+	const [products, setProducts] = useState(getProducts);
+
+	const addProduct = newdata => {
+		setProducts([
+			...products,
+			{
+				id: nanoid,
+				detail: newdata.detail,
+				image: newdata.image,
+				altText: newdata.title,
+				email: newdata.email,
+			},
+		]);
+	};
+
 	return (
 		<>
-			<Form />
-			<ProductGrid products={products} />{' '}
+			<Form onAddProduct={addProduct} />
+			<ProductGrid products={products} />
 		</>
 	);
 }
