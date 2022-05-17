@@ -22,6 +22,7 @@ export default function Home() {
 			...products,
 			{
 				id: nanoid,
+				title: newdata.title,
 				detail: newdata.detail,
 				image: newdata.image,
 				altText: newdata.title,

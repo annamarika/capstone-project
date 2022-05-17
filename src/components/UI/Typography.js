@@ -16,4 +16,5 @@ const StyledP = styled.p`
 	text-transform: uppercase;
 	padding-bottom: 10px;
 	border-bottom: solid 3px #db6c4c;
+	word-wrap: break-word;
 `;

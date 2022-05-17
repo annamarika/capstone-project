@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-const UList = styled.ul`
+const ButtonContainer = styled.div`
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
 `;
 
-export default UList;
+export default ButtonContainer;

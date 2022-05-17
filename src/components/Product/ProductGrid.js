@@ -7,7 +7,12 @@ export default function ProductGrid({ products }) {
 		<UList>
 			{products.map(product => (
 				<ProductLi key={product.id}>
-					<Product detail={product.detail} email={product.email} image={product.image} />
+					<Product
+						title={product.title}
+						detail={product.detail}
+						email={product.email}
+						image={product.image}
+					/>
 				</ProductLi>
 			))}
 		</UList>
