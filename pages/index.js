@@ -1,5 +1,6 @@
 import { getProducts } from '../src/services/get-products';
 import ProductGrid from '../src/components/Product/ProductGrid';
+import Form from '../src/components/Form/Form';
 
 export function getStaticProps() {
 	const products = getProducts();
@@ -12,5 +13,10 @@ export function getStaticProps() {
 }
 
 export default function Home({ products }) {
-	return <ProductGrid products={products} />;
+	return (
+		<>
+			<Form />
+			<ProductGrid products={products} />{' '}
+		</>
+	);
 }
