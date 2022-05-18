@@ -10,7 +10,7 @@ const Input = styled.input`
 	padding: 10px;
 
 	:focus {
-		outline: solid 3px var(--main-bg-color);
+		outline: solid 3px var(--accent-color);
 	}
 
 	::placeholder {
