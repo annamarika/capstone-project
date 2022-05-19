@@ -1,8 +1,10 @@
 import { getProducts } from '../src/services/get-products';
-import ProductGrid from '../src/components/Product/ProductGrid';
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import Form from '../src/components/Form/Form';
 import { nanoid } from 'nanoid';
+import { saveToLocal, loadFromLocal } from '../src/components/lib/localStorage';
+import dynamic from 'next/dynamic';
 
 export function getStaticProps() {
 	const initialProduct = getProducts();
@@ -15,7 +17,15 @@ export function getStaticProps() {
 }
 
 export default function Home({ initialProduct }) {
-	const [products, setProducts] = useState(initialProduct);
+	const ProductGrid = dynamic(() => import('../src/components/Product/ProductGrid'), {
+		ssr: false,
+	});
+
+	const [products, setProducts] = useState(loadFromLocal('localProducts') ?? initialProduct);
+
+	useEffect(() => {
+		saveToLocal('localProducts', products);
+	}, [products]);
 
 	const addProduct = newdata => {
 		setProducts([
