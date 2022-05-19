@@ -5,7 +5,7 @@ import ImageWrapper from '../UI/StyledImageWrapper';
 import TextWrapper from '../UI/StyledTextWrapper';
 import DefaultButton from '../UI/StyledButton';
 
-export default function Product({ detail, email, image, altText }) {
+export default function Product({ title, detail, email, image, altText }) {
 	return (
 		<Container>
 			<ImageWrapper>
@@ -19,6 +19,7 @@ export default function Product({ detail, email, image, altText }) {
 				/>
 			</ImageWrapper>
 			<TextWrapper>
+				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 				<DefaultButton>{email}</DefaultButton>
 			</TextWrapper>

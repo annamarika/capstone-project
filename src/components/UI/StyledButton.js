@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const DefaultButton = styled.button`
 	text-transform: uppercase;
+	font-weight: 600;
 	color: var(--text-color-light);
 	background-color: var(--button-bg-color);
 	border-radius: 19px;
@@ -9,6 +10,7 @@ const DefaultButton = styled.button`
 	display: flex;
 	justify-content: center;
 	padding: 7px 13px;
+	max-width: 209px;
 `;
 
 export default DefaultButton;

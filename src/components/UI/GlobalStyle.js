@@ -20,9 +20,11 @@ html {
   :root {
     --main-bg-color: #E2CADF;
     --main-bg-color-dark: #4B587F;
+    --main-bg-color-light: #ffffff;
     --text-color-light: #ffffff;
     --text-color-dark: #4B587F;
     --button-bg-color: #DB6C4C;
+    --accent-color: #DB6C4C;
       }
 
 

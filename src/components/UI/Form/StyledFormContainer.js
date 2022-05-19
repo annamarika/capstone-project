@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const UList = styled.ul`
+const FormContainer = styled.div`
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	min-height: 100vh;
 `;
 
-export default UList;
+export default FormContainer;

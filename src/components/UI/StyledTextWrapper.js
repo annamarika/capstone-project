@@ -5,6 +5,7 @@ const TextWrapper = styled.article`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	max-width: 140px;
 `;
 
 export default TextWrapper;
