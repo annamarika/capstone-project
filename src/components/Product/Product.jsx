@@ -22,6 +22,7 @@ export default function Product({ title, detail, email, image, altText }) {
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 				<DefaultButton>{email}</DefaultButton>
+				<DefaultButton>delete</DefaultButton>
 			</TextWrapper>
 		</Container>
 	);
