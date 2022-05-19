@@ -5,23 +5,23 @@ import Form from '../src/components/Form/Form';
 import { nanoid } from 'nanoid';
 
 export function getStaticProps() {
-	const products = getProducts();
+	const initialProduct = getProducts();
 
 	return {
 		props: {
-			products,
+			initialProduct,
 		},
 	};
 }
 
-export default function Home() {
-	const [products, setProducts] = useState(getProducts);
+export default function Home({ initialProduct }) {
+	const [products, setProducts] = useState(initialProduct);
 
 	const addProduct = newdata => {
 		setProducts([
 			...products,
 			{
-				id: nanoid,
+				id: nanoid(),
 				title: newdata.title,
 				detail: newdata.detail,
 				image: newdata.image,

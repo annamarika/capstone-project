@@ -3,13 +3,12 @@ import styled from 'styled-components';
 const InputContainer = styled.div`
 	text-transform: uppercase;
 	color: var(--text-color-dark);
-	width: 383px;
 	height: 600px;
-	padding: 50px 0 50px 0;
+	padding: 50px 20px 50px 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	align-items: flex-end;
+	align-items: cneter:
 `;
 
 export default InputContainer;
