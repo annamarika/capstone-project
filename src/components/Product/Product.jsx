@@ -5,7 +5,11 @@ import ImageWrapper from '../UI/StyledImageWrapper';
 import TextWrapper from '../UI/StyledTextWrapper';
 import DefaultButton from '../UI/StyledButton';
 
-export default function Product({ title, detail, email, image, altText }) {
+export default function Product({ id, title, detail, email, image, altText, onDeleteProduct }) {
+	const handleDelete = () => {
+		onDeleteProduct(id);
+	};
+
 	return (
 		<Container>
 			<ImageWrapper>
@@ -22,7 +26,7 @@ export default function Product({ title, detail, email, image, altText }) {
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 				<DefaultButton>{email}</DefaultButton>
-				<DefaultButton>delete</DefaultButton>
+				<DefaultButton onClick={handleDelete}>delete</DefaultButton>
 			</TextWrapper>
 		</Container>
 	);
