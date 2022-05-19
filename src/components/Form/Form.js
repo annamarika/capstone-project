@@ -19,6 +19,7 @@ export default function Form({ onAddProduct }) {
 	const onSubmit = (data, event) => {
 		onAddProduct(data);
 		event.target.reset();
+		handleClick();
 	};
 
 	const initialButtonText = 'create';
@@ -89,9 +90,7 @@ export default function Form({ onAddProduct }) {
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>
-					<DefaultButton type="submit" onClick={handleClick}>
-						{buttonText}
-					</DefaultButton>
+					<DefaultButton type="submit">{buttonText}</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>
