@@ -25,7 +25,7 @@ export default function Product({ id, title, detail, email, image, altText, onDe
 			<TextWrapper>
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
-				<DefaultButton>{email}</DefaultButton>
+				<DefaultButton type="submit">{email}</DefaultButton>
 				<DefaultButton onClick={handleDelete}>delete</DefaultButton>
 			</TextWrapper>
 		</Container>
