@@ -31,10 +31,14 @@ export default function Home({ initialProduct }) {
 		]);
 	};
 
+	const deleteProduct = id => {
+		setProducts(products.filter(product => product.id !== id));
+	};
+
 	return (
 		<>
 			<Form onAddProduct={addProduct} />
-			<ProductGrid products={products} />
+			<ProductGrid products={products} onDeleteProduct={deleteProduct} />
 		</>
 	);
 }

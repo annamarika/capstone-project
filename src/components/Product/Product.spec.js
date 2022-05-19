@@ -16,11 +16,13 @@ describe('ProductPage', () => {
 		const showText = screen.getByText(
 			/Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne./i
 		);
-		const showButton = screen.getByRole('button');
+		const showButton = screen.getByText('hallo@hallo.de');
+		const deleteButton = screen.getByText('delete');
 		const showImage = screen.getByAltText('dress');
 
 		expect(showText).toBeInTheDocument();
 		expect(showButton).toBeInTheDocument();
+		expect(deleteButton).toBeInTheDocument();
 		expect(showImage).toBeInTheDocument();
 	});
 });
