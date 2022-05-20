@@ -71,14 +71,13 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 	const [emailValue, setEmailValue] = useState(email);
 	const [imageValue, setImageValue] = useState(image);
 
-	const [isEditMode, setIsEditMode] = useState(false);
-	const [editInputValue, setEditInputValue] = useState(title, detail, email, image);
-
 	const {
+		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	console.log(watch());
 
 	const onSubmit = () => {
 		onDisableEditMode();
@@ -155,15 +154,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 				<ButtonContainer>
 					<DefaultButton
 						type="submit"
-						onClick={() => {
-							if (isEditMode) {
-								onUpdateProduct(id, editInputValue);
-								setIsEditMode(false);
-							} else {
-								setEditInputValue(title, detail, email, image);
-								setIsEditMode(true);
-							}
-						}}
+						onClick={() => onUpdateProduct(id, title, detail, image, title, email)}
 					>
 						save
 					</DefaultButton>

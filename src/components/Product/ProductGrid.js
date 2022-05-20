@@ -2,7 +2,7 @@ import Product from './Product';
 import UList from '../UI/StyledUList';
 import ProductLi from '../UI/StyledList';
 
-export default function ProductGrid({ products, onDeleteProduct }) {
+export default function ProductGrid({ products, onDeleteProduct, onUpdateProduct }) {
 	return (
 		<UList>
 			{products.map(product => (
@@ -14,6 +14,7 @@ export default function ProductGrid({ products, onDeleteProduct }) {
 						email={product.email}
 						image={product.image}
 						onDeleteProduct={onDeleteProduct}
+						onUpdateProduct={onUpdateProduct}
 					/>
 				</ProductLi>
 			))}
