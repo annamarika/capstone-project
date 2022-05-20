@@ -13,6 +13,7 @@ import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
 import ButtonContainer from '../UI/StyledButtonContainer';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -66,18 +67,27 @@ function ProductModeShow({
 }
 
 function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
-	const [titleValue, setTitleValue] = useState(title);
-	const [detailValue, setDetailValue] = useState(detail);
-	const [emailValue, setEmailValue] = useState(email);
-	const [imageValue, setImageValue] = useState(image);
-
 	const {
+		setValue,
 		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-	console.log(watch());
+
+	const {
+		image: imageValue,
+		detail: detailValue,
+		email: emailValue,
+		title: titleValue,
+	} = watch();
+
+	useEffect(() => {
+		setValue('title', title);
+		setValue('detail', detail);
+		setValue('image', image);
+		setValue('email', email);
+	}, []);
 
 	const onSubmit = () => {
 		onDisableEditMode();
@@ -96,10 +106,6 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 							{...register('image', {
 								required: 'Please fill in a url',
 							})}
-							value={imageValue}
-							onChange={event => {
-								setImageValue(event.target.value);
-							}}
 						/>
 					</InputSingleContainer>
 					<InputSingleContainer>
@@ -112,10 +118,6 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 								required: 'short descriptive title',
 								maxLength: 20,
 							})}
-							value={titleValue}
-							onChange={event => {
-								setTitleValue(event.target.value);
-							}}
 						/>
 					</InputSingleContainer>
 					<InputSingleContainer>
@@ -128,10 +130,6 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 								required: 'Add important details',
 								maxLength: 170,
 							})}
-							value={detailValue}
-							onChange={event => {
-								setDetailValue(event.target.value);
-							}}
 						/>
 					</InputSingleContainer>
 					<InputSingleContainer>
@@ -144,17 +142,23 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 								required: 'please add your email',
 								maxLength: 60,
 							})}
-							value={emailValue}
-							onChange={event => {
-								setEmailValue(event.target.value);
-							}}
 						/>
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>
 					<DefaultButton
 						type="submit"
-						onClick={() => onUpdateProduct(id, title, detail, image, title, email)}
+						onClick={event => {
+							event.preventDefault();
+							onUpdateProduct(
+								id,
+								titleValue,
+								detailValue,
+								imageValue,
+								titleValue,
+								emailValue
+							);
+						}}
 					>
 						save
 					</DefaultButton>

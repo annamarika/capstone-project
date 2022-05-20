@@ -46,8 +46,11 @@ export default function Home({ initialProduct }) {
 	};
 
 	const updateProduct = (id, title, detail, image, altText, email) => {
+		const indexToUpdate = products.findIndex(product => product.id === id);
+		const productsFirstPart = products.slice(0, indexToUpdate);
+		const productsSecondPart = products.slice(indexToUpdate + 1);
 		setProducts([
-			...products,
+			...productsFirstPart,
 			{
 				id,
 				title,
@@ -56,6 +59,7 @@ export default function Home({ initialProduct }) {
 				altText,
 				email,
 			},
+			...productsSecondPart,
 		]);
 	};
 
