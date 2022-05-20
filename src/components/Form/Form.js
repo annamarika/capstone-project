@@ -11,14 +11,15 @@ import ButtonContainer from '../UI/StyledButtonContainer';
 
 export default function Form({ onAddProduct }) {
 	const {
+		reset,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data, event) => {
+	const onSubmit = data => {
 		onAddProduct(data);
-		event.target.reset();
+		reset();
 		handleClick();
 	};
 
