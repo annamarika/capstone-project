@@ -26,14 +26,13 @@ export default function Product(props) {
 	};
 
 	return (
-		// eslint-disable-next-line react/jsx-no-useless-fragment
-		<>
+		<div>
 			{isEditMode ? (
 				<ProductModeEdit {...props} onDisableEditMode={disableEditMode} />
 			) : (
 				<ProductModeShow {...props} onEnableEditMode={enableEditMode} />
 			)}
-		</>
+		</div>
 	);
 }
 
