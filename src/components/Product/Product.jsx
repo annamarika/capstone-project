@@ -162,6 +162,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 					>
 						save
 					</DefaultButton>
+					<DefaultButton type="submit">cancel</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>
