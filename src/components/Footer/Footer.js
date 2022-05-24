@@ -7,28 +7,25 @@ export default function Footer() {
 		<FooterContainer>
 			<FooterNav>
 				<Link passHref href="/products">
-					<button type="button">
+					<FooterButton type="button">
 						<SvgContainer>
 							<MySVG size="34" variant="products" />
 						</SvgContainer>
-					</button>
+					</FooterButton>
 				</Link>
 				<Link passHref href="/create">
-					<button type="button">
+					<FooterButton type="button">
 						<SvgContainer>
 							<MySVG size="34" variant="add" />
 						</SvgContainer>
-					</button>
+					</FooterButton>
 				</Link>
 				<Link passHref href="/profile">
-					<button type="button">
+					<FooterButton type="button">
 						<SvgContainer>
 							<MySVG size="34" variant="profile" />
 						</SvgContainer>
-					</button>
-				</Link>
-				<Link passHref href="/">
-					<button type="button">start</button>
+					</FooterButton>
 				</Link>
 			</FooterNav>
 		</FooterContainer>
@@ -53,4 +50,16 @@ const SvgContainer = styled.div`
 	background-color: var(--main-bg-color);
 	width: 55px;
 	border-radius: 50%;
+	padding: 5px;
+`;
+
+const FooterButton = styled.button`
+	background-color: var(--main-bg-color-dark);
+	border: none;
+	padding: 1.5rem;
+	height: 100%;
+	width: 33%;
+	display: flex;
+	justify-content: center;
+	border: none;
 `;
