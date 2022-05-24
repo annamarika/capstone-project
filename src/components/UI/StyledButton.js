@@ -10,6 +10,7 @@ const DefaultButton = styled.button`
 	display: flex;
 	justify-content: center;
 	padding: 7px 13px;
+	margin: 0 10px 0 10px;
 	max-width: 209px;
 `;
 

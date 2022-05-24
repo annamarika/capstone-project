@@ -11,14 +11,16 @@ import ButtonContainer from '../UI/StyledButtonContainer';
 
 export default function Form({ onAddProduct }) {
 	const {
+		reset,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data, event) => {
+	const onSubmit = data => {
 		onAddProduct(data);
-		event.target.reset();
+		reset();
+		handleClick();
 	};
 
 	const initialButtonText = 'create';
@@ -43,10 +45,13 @@ export default function Form({ onAddProduct }) {
 							type="url"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
-								required: 'Please fill in a url',
+								required: true,
 							})}
 							placeholder="Add image URL"
 						/>
+						{errors.image && errors.image.type === 'required' && (
+							<span>please enter a valid url</span>
+						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>
@@ -55,11 +60,17 @@ export default function Form({ onAddProduct }) {
 							type="text"
 							aria-invalid={errors.title ? 'true' : 'false'}
 							{...register('title', {
-								required: 'short descriptive title',
+								required: true,
 								maxLength: 20,
 							})}
 							placeholder="short discriping title"
 						/>
+						{errors.title && errors.title.type === 'required' && (
+							<span>please enter a short title</span>
+						)}
+						{errors.title && errors.title.type === 'maxLength' && (
+							<span>Please use less than 20 characters</span>
+						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="detail">detail</Label>
@@ -68,11 +79,17 @@ export default function Form({ onAddProduct }) {
 							type="text"
 							aria-invalid={errors.detail ? 'true' : 'false'}
 							{...register('detail', {
-								required: 'Add important details',
+								required: true,
 								maxLength: 170,
 							})}
 							placeholder="Add important details"
 						/>
+						{errors.detail && errors.detail.type === 'required' && (
+							<span>please enter the details</span>
+						)}
+						{errors.detail && errors.detail.type === 'maxLength' && (
+							<span>Please use less than 170 characters</span>
+						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="email">email</Label>
@@ -81,17 +98,21 @@ export default function Form({ onAddProduct }) {
 							type="email"
 							aria-invalid={errors.email ? 'true' : 'false'}
 							{...register('email', {
-								required: 'please add your email',
+								required: true,
 								maxLength: 60,
 							})}
 							placeholder="..."
 						/>
+						{errors.email && errors.email.type === 'required' && (
+							<span>please enter a valid email</span>
+						)}
+						{errors.email && errors.email.type === 'maxLength' && (
+							<span>Please use less than 60 characters</span>
+						)}
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>
-					<DefaultButton type="submit" onClick={handleClick}>
-						{buttonText}
-					</DefaultButton>
+					<DefaultButton type="submit">{buttonText}</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>

@@ -1,5 +1,4 @@
 import { getProducts } from '../src/services/get-products';
-
 import React, { useEffect, useState } from 'react';
 import Form from '../src/components/Form/Form';
 import { nanoid } from 'nanoid';
@@ -45,10 +44,21 @@ export default function Home({ initialProduct }) {
 		setProducts(products.filter(product => product.id !== id));
 	};
 
+	const updateProduct = (id, dataObject) => {
+		const updateProduct = products.map(product =>
+			product.id === id ? { ...dataObject, altText: dataObject.title, id: id } : product
+		);
+		setProducts(updateProduct);
+	};
+
 	return (
 		<>
 			<Form onAddProduct={addProduct} />
-			<ProductGrid products={products} onDeleteProduct={deleteProduct} />
+			<ProductGrid
+				products={products}
+				onDeleteProduct={deleteProduct}
+				onUpdateProduct={updateProduct}
+			/>
 		</>
 	);
 }

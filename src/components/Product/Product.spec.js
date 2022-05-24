@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('ProductPage', () => {
-	it('render one Button, a text and an image', () => {
+	it('render three Buttons, a text and an image', () => {
 		render(
 			<Product
 				detail="Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. "
@@ -18,11 +18,13 @@ describe('ProductPage', () => {
 		);
 		const showButton = screen.getByText('hallo@hallo.de');
 		const deleteButton = screen.getByText('delete');
+		const editButton = screen.getByText('edit');
 		const showImage = screen.getByAltText('dress');
 
 		expect(showText).toBeInTheDocument();
 		expect(showButton).toBeInTheDocument();
 		expect(deleteButton).toBeInTheDocument();
+		expect(editButton).toBeInTheDocument();
 		expect(showImage).toBeInTheDocument();
 	});
 });
