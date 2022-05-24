@@ -44,22 +44,11 @@ export default function Home({ initialProduct }) {
 		setProducts(products.filter(product => product.id !== id));
 	};
 
-	const updateProduct = (id, title, detail, image, altText, email) => {
-		const indexToUpdate = products.findIndex(product => product.id === id);
-		const productsFirstPart = products.slice(0, indexToUpdate);
-		const productsSecondPart = products.slice(indexToUpdate + 1);
-		setProducts([
-			...productsFirstPart,
-			{
-				id,
-				title,
-				detail,
-				image,
-				altText,
-				email,
-			},
-			...productsSecondPart,
-		]);
+	const updateProduct = (id, dataObject) => {
+		const updateProduct = products.map(product =>
+			product.id === id ? { ...dataObject, altText: dataObject.title, id: id } : product
+		);
+		setProducts(updateProduct);
 	};
 
 	return (

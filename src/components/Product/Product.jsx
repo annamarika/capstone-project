@@ -68,18 +68,10 @@ function ProductModeShow({
 function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
 	const {
 		setValue,
-		watch,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-
-	const {
-		image: imageValue,
-		detail: detailValue,
-		email: emailValue,
-		title: titleValue,
-	} = watch();
 
 	useEffect(() => {
 		setValue('title', title);
@@ -88,7 +80,8 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 		setValue('email', email);
 	}, []);
 
-	const onSubmit = () => {
+	const onSubmit = data => {
+		onUpdateProduct(id, data);
 		onDisableEditMode();
 	};
 
@@ -97,7 +90,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
 					<InputSingleContainer>
-						<Label htmlFor="imageValue">image url</Label>
+						<Label htmlFor="image">image url</Label>
 						<Input
 							id="image"
 							type="url"
@@ -167,23 +160,10 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>
-					<DefaultButton
-						type="submit"
-						onClick={event => {
-							event.preventDefault();
-							onUpdateProduct(
-								id,
-								titleValue,
-								detailValue,
-								imageValue,
-								titleValue,
-								emailValue
-							);
-						}}
-					>
-						save
+					<DefaultButton type="submit">save</DefaultButton>
+					<DefaultButton type="button" onClick={onDisableEditMode}>
+						cancel
 					</DefaultButton>
-					<DefaultButton type="submit">cancel</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>
