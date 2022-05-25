@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultButton from '../UI/StyledButton';
+import DefaultButton from '../UI/Button/StyledButton';
 
 export default {
 	title: 'Components/Button',
