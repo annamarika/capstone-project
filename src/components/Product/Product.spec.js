@@ -31,7 +31,7 @@ describe('ProductPage', () => {
 		const deleteButton = screen.getByText('delete');
 		const editButton = screen.getByText('edit');
 		const showImage = screen.getByAltText('dress');
-		screen.debug();
+
 		expect(showText).toBeInTheDocument();
 		expect(showButton).toBeInTheDocument();
 		expect(deleteButton).toBeInTheDocument();
