@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 describe('ProductGrid', () => {
-	it('render one Button, a text and an image', () => {
+	it('render a List of Objects', () => {
 		render(
 			<ProductGrid
 				products={[
