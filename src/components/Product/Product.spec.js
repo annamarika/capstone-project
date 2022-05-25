@@ -2,6 +2,17 @@ import Product from './Product';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+jest.mock('next/router', () => ({
+	useRouter() {
+		return {
+			route: '/',
+			pathname: '',
+			query: '',
+			asPath: '',
+		};
+	},
+}));
+
 describe('ProductPage', () => {
 	it('render three Buttons, a text and an image', () => {
 		render(
@@ -20,7 +31,7 @@ describe('ProductPage', () => {
 		const deleteButton = screen.getByText('delete');
 		const editButton = screen.getByText('edit');
 		const showImage = screen.getByAltText('dress');
-
+		screen.debug();
 		expect(showText).toBeInTheDocument();
 		expect(showButton).toBeInTheDocument();
 		expect(deleteButton).toBeInTheDocument();
