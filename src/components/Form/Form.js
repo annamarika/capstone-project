@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import DefaultButton from '../UI/StyledButton';
+import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
 import FormElement from '../UI/Form/StyledFormElement';
 import InputContainer from '../UI/Form/StyledInputContainer';
 import InputSingleContainer from '../UI/Form/StyledInputSingleContainer';
 import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
-import ButtonContainer from '../UI/StyledButtonContainer';
+import ButtonContainer from '../UI/Button/StyledButtonContainer';
 
 export default function Form({ onAddProduct }) {
 	const {
