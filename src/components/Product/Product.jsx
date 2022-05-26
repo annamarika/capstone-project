@@ -4,16 +4,17 @@ import Typography from '../UI/Typography';
 import Container from '../UI/StyledContainer';
 import ImageWrapper from '../UI/StyledImageWrapper';
 import TextWrapper from '../UI/StyledTextWrapper';
-import DefaultButton from '../UI/StyledButton';
+import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
 import FormElement from '../UI/Form/StyledFormElement';
 import InputContainer from '../UI/Form/StyledInputContainer';
 import InputSingleContainer from '../UI/Form/StyledInputSingleContainer';
 import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
-import ButtonContainer from '../UI/StyledButtonContainer';
+import ButtonContainer from '../UI/Button/StyledButtonContainer';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -49,6 +50,7 @@ function ProductModeShow({
 	const handleDelete = () => {
 		onDeleteProduct(id);
 	};
+	const { asPath } = useRouter();
 	return (
 		<Container>
 			<ImageWrapper>
@@ -57,9 +59,16 @@ function ProductModeShow({
 			<TextWrapper>
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
-				<DefaultButton>{email}</DefaultButton>
-				<DefaultButton onClick={handleDelete}>delete</DefaultButton>
-				<DefaultButton onClick={onEnableEditMode}>edit</DefaultButton>
+
+				{asPath !== '/profile' && <DefaultButton>{email}</DefaultButton>}
+				{asPath !== '/products' && (
+					<DefaultButton onClick={handleDelete}>delete</DefaultButton>
+				)}
+				{asPath !== '/products' && (
+					<DefaultButton variant="hide" onClick={onEnableEditMode}>
+						edit
+					</DefaultButton>
+				)}
 			</TextWrapper>
 		</Container>
 	);

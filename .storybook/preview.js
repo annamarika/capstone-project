@@ -1,5 +1,6 @@
 import GlobalStyle from "../src/components/UI/GlobalStyle"
 import * as NextImage from "next/image";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
 const OriginalNextImage = NextImage.default;
 
@@ -27,4 +28,10 @@ export const decorators = [
     );
   },
  ];
+
+ export const parameters = {
+  nextRouter: {
+    Provider: RouterContext.Provider,
+  },
+}
 

@@ -4,6 +4,11 @@ import Product from './Product';
 export default {
 	title: 'Components/Product',
 	component: Product,
+	parameters: {
+		nextRouter: {
+			pathname: '/profile',
+		},
+	},
 	decorators: [
 		Story => {
 			return (

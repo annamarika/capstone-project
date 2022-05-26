@@ -2,6 +2,17 @@ import Product from './Product';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+jest.mock('next/router', () => ({
+	useRouter() {
+		return {
+			route: '/',
+			pathname: '',
+			query: '',
+			asPath: '',
+		};
+	},
+}));
+
 describe('ProductPage', () => {
 	it('render three Buttons, a text and an image', () => {
 		render(
