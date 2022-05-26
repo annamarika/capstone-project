@@ -4,8 +4,12 @@ const nextConfig = {
 	compiler: {
 		styledComponents: true,
 	},
+	env: {
+		CLOUDINARY_PRESET: process.env.CLOUDINARY_PRESET,
+		CLOUDINARY_CLOUD: process.env.CLOUDINARY_CLOUD,
+	},
 	images: {
-		domains: ['images.unsplash.com'],
+		domains: ['res.cloudinary.com', 'images.unsplash.com'],
 	},
 };
 
