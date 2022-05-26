@@ -60,7 +60,11 @@ function ProductModeShow({
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 
-				{asPath !== '/profile' && <DefaultButton>{email}</DefaultButton>}
+				{asPath !== '/profile' && (
+					<DefaultButton>
+						<a href={`mailto:${email}`}>email</a>
+					</DefaultButton>
+				)}
 				{asPath !== '/products' && (
 					<DefaultButton onClick={handleDelete}>delete</DefaultButton>
 				)}
