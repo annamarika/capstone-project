@@ -12,6 +12,10 @@ const DefaultButton = styled.button`
 	padding: 7px 13px;
 	margin: 0 10px 0 10px;
 	max-width: 209px;
+
+	:hover {
+		color: var(--text-color-dark);
+	}
 `;
 
 export default DefaultButton;

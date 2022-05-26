@@ -62,7 +62,9 @@ function ProductModeShow({
 
 				{asPath !== '/profile' && (
 					<DefaultButton>
-						<a href={`mailto:${email}`}>email</a>
+						<Typography href={`mailto:${email}`} variant="a">
+							email
+						</Typography>
 					</DefaultButton>
 				)}
 				{asPath !== '/products' && (
