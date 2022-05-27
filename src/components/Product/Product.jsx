@@ -51,6 +51,7 @@ function ProductModeShow({
 		onDeleteProduct(id);
 	};
 	const { asPath } = useRouter();
+	console.log(image);
 	return (
 		<Container>
 			<ImageWrapper>
