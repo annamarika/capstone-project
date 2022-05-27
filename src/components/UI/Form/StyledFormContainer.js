@@ -5,6 +5,7 @@ const FormContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	margin: 30px 10px 120px 10px;
 `;
 
 export default FormContainer;

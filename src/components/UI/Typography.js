@@ -15,6 +15,12 @@ export default function Typography({ children, variant, component, ...rest }) {
 					{children}
 				</StyledP>
 			);
+		case 'pUpload':
+			return (
+				<StyledPUpload {...rest} as={component}>
+					{children}
+				</StyledPUpload>
+			);
 		case 'a':
 			return (
 				<StyledA {...rest} as={component}>
@@ -37,6 +43,13 @@ const StyledP = styled.p`
 	border-bottom: solid 3px #db6c4c;
 	word-wrap: break-word;
 	text-decoration: none;
+`;
+
+const StyledPUpload = styled.p`
+	color: var(--text-color-dark);
+	text-transform: uppercase;
+	word-wrap: break-word;
+	width: 125px;
 `;
 
 const StyledA = styled.a`

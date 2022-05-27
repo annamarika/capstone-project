@@ -9,6 +9,9 @@ import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
 import ButtonContainer from '../UI/Button/StyledButtonContainer';
 import Image from 'next/image';
+import Container from '../UI/StyledContainer';
+import ImageWrapper from '../UI/StyledImageWrapper';
+import Typography from '../UI/Typography';
 
 export default function Form({ onAddProduct }) {
 	const {
@@ -76,26 +79,41 @@ export default function Form({ onAddProduct }) {
 		<FormContainer>
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
-					<InputSingleContainer>
-						<Label htmlFor="image">image url</Label>
+					<InputSingleContainer variant="upload">
+						<Label htmlFor="image" />
 						<Input
 							id="image"
 							type="file"
+							variant="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,
 							})}
 							onChange={uploadImage}
 						/>
-						<Image
-							alt="placeholder"
-							src={previewImage.url}
-							width={previewImage.width}
-							height={previewImage.height}
-						/>
+						{errors.image && errors.image.type === 'required' && (
+							<span>please select a file</span>
+						)}
+						<Container variant="imageUpload">
+							<Typography variant="pUpload">
+								for best quality {'->'} please use upright images only
+							</Typography>
+							<ImageWrapper variant="placeholder">
+								<Image
+									alt="placeholder"
+									src={previewImage.url}
+									width={previewImage.width}
+									height={previewImage.height}
+									layout="fill"
+									objectFit="cover"
+								/>
+							</ImageWrapper>
+						</Container>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="title">title</Label>
+						<Label htmlFor="title" variant="headline">
+							title
+						</Label>
 						<Input
 							id="title"
 							type="text"
@@ -104,7 +122,7 @@ export default function Form({ onAddProduct }) {
 								required: true,
 								maxLength: 20,
 							})}
-							placeholder="short discriping title"
+							placeholder="..."
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -114,7 +132,9 @@ export default function Form({ onAddProduct }) {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="detail">detail</Label>
+						<Label htmlFor="detail" variant="headline">
+							detail
+						</Label>
 						<Input
 							id="detail"
 							type="text"
@@ -123,7 +143,7 @@ export default function Form({ onAddProduct }) {
 								required: true,
 								maxLength: 170,
 							})}
-							placeholder="Add important details"
+							placeholder="..."
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -133,7 +153,9 @@ export default function Form({ onAddProduct }) {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="email">email</Label>
+						<Label htmlFor="email" variant="headline">
+							email
+						</Label>
 						<Input
 							id="email"
 							type="email"

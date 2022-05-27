@@ -53,7 +53,7 @@ function ProductModeShow({
 	const { asPath } = useRouter();
 	console.log(image);
 	return (
-		<Container>
+		<Container variant="product">
 			<ImageWrapper>
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
