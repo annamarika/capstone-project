@@ -27,7 +27,7 @@ describe('ProductPage', () => {
 		const showText = screen.getByText(
 			/Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne./i
 		);
-		const showButton = screen.getByText('hallo@hallo.de');
+		const showButton = screen.getByText('email');
 		const deleteButton = screen.getByText('delete');
 		const editButton = screen.getByText('edit');
 		const showImage = screen.getByAltText('dress');
