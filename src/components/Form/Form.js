@@ -26,8 +26,7 @@ export default function Form({ onAddProduct }) {
 	const PRESET = process.env.CLOUDINARY_PRESET;
 
 	const placeholderImage = {
-		secure_url:
-			'https://images.unsplash.com/photo-1542295669297-4d352b042bca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
+		secure_url: 'capstone/poldq9fc4vzrosbtl2zu',
 		width: 120,
 		height: 180,
 	};
