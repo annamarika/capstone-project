@@ -25,7 +25,9 @@ const Input = styled.input`
 	${({ variant }) =>
 		variant === 'file' &&
 		css`
-			display: none;
+			position: fixed;
+			top: -100%;
+			left: -100vw;
 		`}
 `;
 

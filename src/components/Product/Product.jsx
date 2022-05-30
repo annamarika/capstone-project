@@ -83,7 +83,6 @@ function ProductModeShow({
 
 function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
 	const {
-		watch,
 		setValue,
 		register,
 		handleSubmit,
@@ -103,10 +102,10 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 
 	const [previewImage, setPreviewImage] = useState(image);
 
-	const uploadImage = async () => {
+	const uploadImage = async event => {
 		try {
 			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
-			const image = watch('image')[0];
+			const image = event.target.files[0];
 
 			const fileData = new FormData();
 			fileData.append('file', image);
@@ -116,15 +115,16 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 				method: 'POST',
 				body: fileData,
 			});
-
-			setPreviewImage(await response.json());
+			const t = await response.json();
+			const new1 = t.public_id;
+			setPreviewImage(new1);
 		} catch (error) {
 			console.error(error.message);
 		}
 	};
 
 	const onSubmit = data => {
-		data.image = previewImage.url;
+		data.image = previewImage;
 		onUpdateProduct(id, data);
 		onDisableEditMode();
 	};
@@ -156,7 +156,12 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 								for best quality {'->'} please use upright images only
 							</Typography>
 							<ImageWrapper variant="placeholder">
-								<Image alt={title} src={image} layout="fill" objectFit="cover" />
+								<Image
+									alt={title}
+									src={previewImage}
+									layout="fill"
+									objectFit="cover"
+								/>
 							</ImageWrapper>
 						</Container>
 					</InputSingleContainer>

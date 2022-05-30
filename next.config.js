@@ -9,7 +9,9 @@ const nextConfig = {
 		CLOUDINARY_CLOUD: process.env.CLOUDINARY_CLOUD,
 	},
 	images: {
-		domains: ['res.cloudinary.com', 'images.unsplash.com'],
+		loader: 'cloudinary',
+		path: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD}/image/upload/`,
+		domains: ['images.unsplash.com'],
 	},
 };
 

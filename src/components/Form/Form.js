@@ -15,7 +15,6 @@ import Typography from '../UI/Typography';
 
 export default function Form({ onAddProduct }) {
 	const {
-		watch,
 		reset,
 		register,
 		handleSubmit,
@@ -27,17 +26,18 @@ export default function Form({ onAddProduct }) {
 	const PRESET = process.env.CLOUDINARY_PRESET;
 
 	const placeholderImage = {
-		url: 'https://images.unsplash.com/photo-1542295669297-4d352b042bca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
+		secure_url:
+			'https://images.unsplash.com/photo-1542295669297-4d352b042bca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80',
 		width: 120,
 		height: 180,
 	};
 
 	const [previewImage, setPreviewImage] = useState(placeholderImage);
-
-	const uploadImage = async () => {
+	console.log(previewImage);
+	const uploadImage = async event => {
 		try {
 			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
-			const image = watch('image')[0];
+			const image = event.target.files[0];
 
 			const fileData = new FormData();
 			fileData.append('file', image);
@@ -47,16 +47,17 @@ export default function Form({ onAddProduct }) {
 				method: 'POST',
 				body: fileData,
 			});
-
-			setPreviewImage(await response.json());
+			const t = await response.json();
+			const new1 = { secure_url: t.public_id, width: t.width, height: t.height };
+			setPreviewImage(new1);
 		} catch (error) {
 			console.error(error.message);
 		}
 	};
 
 	const onSubmit = data => {
-		data.image = previewImage.url;
-
+		data.image = previewImage.secure_url;
+		console.log(data);
 		onAddProduct(data);
 		reset();
 		handleClick();
@@ -102,7 +103,7 @@ export default function Form({ onAddProduct }) {
 							<ImageWrapper variant="placeholder">
 								<Image
 									alt="placeholder"
-									src={previewImage.url}
+									src={previewImage.secure_url}
 									layout="fill"
 									objectFit="cover"
 								/>
