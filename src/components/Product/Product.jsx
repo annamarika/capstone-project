@@ -117,7 +117,6 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 			});
 			const translation = await response.json();
 			const newImage = translation.public_id;
-			console.log(translation.public_id);
 			setPreviewImage(newImage);
 		} catch (error) {
 			console.error(error.message);

@@ -32,7 +32,7 @@ export default function Form({ onAddProduct }) {
 	};
 
 	const [previewImage, setPreviewImage] = useState(placeholderImage);
-	console.log(previewImage);
+
 	const uploadImage = async event => {
 		try {
 			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
@@ -60,7 +60,7 @@ export default function Form({ onAddProduct }) {
 
 	const onSubmit = data => {
 		data.image = previewImage.secure_url;
-		console.log(data);
+
 		onAddProduct(data);
 		reset();
 		handleClick();
