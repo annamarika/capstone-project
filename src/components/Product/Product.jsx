@@ -51,7 +51,7 @@ function ProductModeShow({
 		onDeleteProduct(id);
 	};
 	const { asPath } = useRouter();
-	console.log(image);
+
 	return (
 		<Container variant="product">
 			<ImageWrapper>
@@ -83,6 +83,7 @@ function ProductModeShow({
 
 function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
 	const {
+		watch,
 		setValue,
 		register,
 		handleSubmit,
@@ -92,11 +93,38 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 	useEffect(() => {
 		setValue('title', title);
 		setValue('detail', detail);
-		setValue('image', image);
+		setPreviewImage('image', image);
 		setValue('email', email);
 	}, []);
 
+	const CLOUD = process.env.CLOUDINARY_CLOUD;
+
+	const PRESET = process.env.CLOUDINARY_PRESET;
+
+	const [previewImage, setPreviewImage] = useState(image);
+
+	const uploadImage = async () => {
+		try {
+			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
+			const image = watch('image')[0];
+
+			const fileData = new FormData();
+			fileData.append('file', image);
+			fileData.append('upload_preset', PRESET);
+
+			const response = await fetch(url, {
+				method: 'POST',
+				body: fileData,
+			});
+
+			setPreviewImage(await response.json());
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	const onSubmit = data => {
+		data.image = previewImage.url;
 		onUpdateProduct(id, data);
 		onDisableEditMode();
 	};
@@ -105,19 +133,32 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 		<FormContainer>
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
-					<InputSingleContainer>
-						<Label htmlFor="image">image url</Label>
+					<InputSingleContainer variant="upload">
+						<Label htmlFor="image" variant="upload">
+							Image Upload
+						</Label>
+
 						<Input
 							id="image"
-							type="url"
+							type="file"
+							variant="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,
 							})}
+							onChange={uploadImage}
 						/>
-						{errors.imageValue && errors.imageValue.type === 'required' && (
-							<span>please enter a valid url</span>
+						{errors.image && errors.image.type === 'required' && (
+							<span>please select a file</span>
 						)}
+						<Container variant="imageUpload">
+							<Typography variant="pUpload">
+								for best quality {'->'} please use upright images only
+							</Typography>
+							<ImageWrapper variant="placeholder">
+								<Image alt={title} src={image} layout="fill" objectFit="cover" />
+							</ImageWrapper>
+						</Container>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>
