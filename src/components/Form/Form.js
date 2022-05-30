@@ -47,9 +47,13 @@ export default function Form({ onAddProduct }) {
 				method: 'POST',
 				body: fileData,
 			});
-			const t = await response.json();
-			const new1 = { secure_url: t.public_id, width: t.width, height: t.height };
-			setPreviewImage(new1);
+			const translation = await response.json();
+			const newImage = {
+				secure_url: translation.public_id,
+				width: translation.width,
+				height: translation.height,
+			};
+			setPreviewImage(newImage);
 		} catch (error) {
 			console.error(error.message);
 		}

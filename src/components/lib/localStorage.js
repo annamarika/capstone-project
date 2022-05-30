@@ -7,8 +7,8 @@ function loadFromLocal(key, initialValue) {
 		return initialValue;
 	}
 	try {
-		const t = JSON.parse(localStorage.getItem(key)) || initialValue;
-		return t;
+		const translation = JSON.parse(localStorage.getItem(key)) || initialValue;
+		return translation;
 	} catch (error) {
 		console.error(error.message);
 	}

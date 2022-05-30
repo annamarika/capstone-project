@@ -115,9 +115,9 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 				method: 'POST',
 				body: fileData,
 			});
-			const t = await response.json();
-			const new1 = t.public_id;
-			setPreviewImage(new1);
+			const translation = await response.json();
+			const newImage = translation.public_id;
+			setPreviewImage(newImage);
 		} catch (error) {
 			console.error(error.message);
 		}
