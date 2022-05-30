@@ -92,7 +92,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 	useEffect(() => {
 		setValue('title', title);
 		setValue('detail', detail);
-		setPreviewImage('image', image);
+		setValue('image', image);
 		setValue('email', email);
 	}, []);
 
