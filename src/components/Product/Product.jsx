@@ -138,7 +138,6 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 				<InputContainer>
 					<InputSingleContainer variant="upload">
 						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
-
 						<InputFile
 							id="image"
 							type="file"

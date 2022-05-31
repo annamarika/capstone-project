@@ -87,7 +87,7 @@ export default function Form({ onAddProduct }) {
 						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
 						<InputFile
 							id="image"
-							variant="file"
+							type="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,
