@@ -9,9 +9,9 @@ import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
 import ButtonContainer from '../UI/Button/StyledButtonContainer';
 import Image from 'next/image';
-import Container from '../UI/StyledContainer';
-import ImageWrapper from '../UI/StyledImageWrapper';
+import ImageWrapper from '../UI/Image/StyledImageWrapper';
 import Typography from '../UI/Typography';
+import ImageContainer from '../UI/Image/StyledImageContainer';
 
 export default function Form({ onAddProduct }) {
 	const {
@@ -99,7 +99,7 @@ export default function Form({ onAddProduct }) {
 						{errors.image && errors.image.type === 'required' && (
 							<span>please select a file</span>
 						)}
-						<Container variant="imageUpload">
+						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
 							</Typography>
@@ -111,7 +111,7 @@ export default function Form({ onAddProduct }) {
 									objectFit="cover"
 								/>
 							</ImageWrapper>
-						</Container>
+						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">

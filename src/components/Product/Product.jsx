@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import Typography from '../UI/Typography';
 import Container from '../UI/StyledContainer';
-import ImageWrapper from '../UI/StyledImageWrapper';
+import ImageWrapper from '../UI/Image/StyledImageWrapper';
 import TextWrapper from '../UI/StyledTextWrapper';
 import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
@@ -15,6 +15,7 @@ import ButtonContainer from '../UI/Button/StyledButtonContainer';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import ImageContainer from '../UI/Image/StyledImageContainer';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -151,7 +152,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 						{errors.image && errors.image.type === 'required' && (
 							<span>please select a file</span>
 						)}
-						<Container variant="imageUpload">
+						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
 							</Typography>
@@ -163,7 +164,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 									objectFit="cover"
 								/>
 							</ImageWrapper>
-						</Container>
+						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>
