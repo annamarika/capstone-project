@@ -16,6 +16,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import ImageContainer from '../UI/Image/StyledImageContainer';
+import InputFile from '../UI/Form/StyledInputFile';
+import LabelUpload from '../UI/Form/StyledLableUpload';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -135,14 +137,11 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
 					<InputSingleContainer variant="upload">
-						<Label htmlFor="image" variant="upload">
-							Image Upload
-						</Label>
+						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
 
-						<Input
+						<InputFile
 							id="image"
 							type="file"
-							variant="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,

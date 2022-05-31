@@ -12,6 +12,8 @@ import Image from 'next/image';
 import ImageWrapper from '../UI/Image/StyledImageWrapper';
 import Typography from '../UI/Typography';
 import ImageContainer from '../UI/Image/StyledImageContainer';
+import InputFile from '../UI/Form/StyledInputFile';
+import LabelUpload from '../UI/Form/StyledLableUpload';
 
 export default function Form({ onAddProduct }) {
 	const {
@@ -82,13 +84,9 @@ export default function Form({ onAddProduct }) {
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
 					<InputSingleContainer variant="upload">
-						<Label htmlFor="image" variant="upload">
-							Image Upload
-						</Label>
-
-						<Input
+						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
+						<InputFile
 							id="image"
-							type="file"
 							variant="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
