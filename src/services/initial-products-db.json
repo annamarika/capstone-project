@@ -1,5 +1,6 @@
 [
   {
+    "user": "Anna",
     "title": "red dress",
     "detail": "Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. ",
     "image": "capstone/poldq9fc4vzrosbtl2zu",
@@ -7,6 +8,7 @@
     "email": "hallo@hallo.de"
   },
   {
+    "user": "Mona",
     "title": "lv bag",
     "detail": "LV bag. Perfect as Clutch or Shoulderbag. brand new. Brand LV. Munich. ",
     "image": "capstone/f7hmyou5lsd8b2bk5aqe",
@@ -14,6 +16,7 @@
     "email": "hey@hallo.de"
   },
   {
+    "user": "Lisa",
     "title": "nike sneaker",
     "detail": "Green velvet nike Shoes. Trendy. Worn. Size 40. Brand Nike. Berlin. ",
     "image": "capstone/rj66vnknxgisi4o3ypun",
@@ -21,6 +24,7 @@
     "email": "hej@hallo.de"
   },
   {
+    "user": "Anna",
     "title": "Golden Bracelet",
     "detail": "Golden Bracelet. Posh. granny old but still nice. Brand unknown. Hamburg. ",
     "image": "capstone/q0179kg52li4cv1vziz1",
