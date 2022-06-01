@@ -7,13 +7,13 @@ export default async function handler(request, response) {
 		const data = JSON.parse(request.body);
 		await dbConnect();
 
-		let user = await User.findOne({ user: data.user });
+		let user = await User.findOne({ name: data.name });
 		if (!user) {
-			user = await User.create({ user: data.user });
+			user = await User.create({ name: data.name });
 		}
 
 		const newProduct = await Product.create({
-			user: data.user,
+			user: data.id,
 			image: data.image,
 			title: data.title,
 			detail: data.detail,
