@@ -12,7 +12,7 @@ export default async function handler(request, response) {
 				user = await User.create({ name: data.name });
 			}
 			const newProduct = await Product.create({
-				name: data.id,
+				name: data.name,
 				image: data.image,
 				title: data.title,
 				detail: data.detail,

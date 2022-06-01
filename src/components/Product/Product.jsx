@@ -170,7 +170,7 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 								required: true,
 							})}
 							onChange={event => {
-								uploadImage();
+								uploadImage(event);
 								setImageValue(event.target.value);
 							}}
 						/>

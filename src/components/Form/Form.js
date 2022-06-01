@@ -113,7 +113,7 @@ export default function Form() {
 								required: true,
 							})}
 							onChange={event => {
-								uploadImage();
+								uploadImage(event);
 								setImageValue(event.target.value);
 							}}
 						/>

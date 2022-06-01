@@ -3,8 +3,8 @@ import ProductGrid from '../src/components/Product/ProductGrid';
 import { swrFetcher } from '../src/components/lib/swr-fetcher';
 import { SWRConfig } from 'swr';
 
-export function getStaticProps() {
-	const products = getProducts();
+export async function getStaticProps() {
+	const products = await getProducts();
 
 	return {
 		props: {
@@ -16,8 +16,6 @@ export function getStaticProps() {
 }
 
 export default function Products({ fallback }) {
-	console.log(fallback);
-
 	return (
 		<SWRConfig value={{ fetcher: swrFetcher, fallback }}>
 			<ProductGrid />
