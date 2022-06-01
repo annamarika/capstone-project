@@ -9,6 +9,7 @@ export default function ProductGrid({ products, onDeleteProduct, onUpdateProduct
 				<ProductLi key={product.id}>
 					<Product
 						id={product.id}
+						name={product.name}
 						title={product.title}
 						detail={product.detail}
 						email={product.email}

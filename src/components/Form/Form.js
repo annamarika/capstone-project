@@ -112,6 +112,25 @@ export default function Form({ onAddProduct }) {
 						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
+						<Label htmlFor="name">name</Label>
+						<Input
+							id="name"
+							type="text"
+							aria-invalid={errors.name ? 'true' : 'false'}
+							{...register('name', {
+								required: true,
+								maxLength: 20,
+							})}
+							placeholder="..."
+						/>
+						{errors.name && errors.name.type === 'required' && (
+							<span>please enter your name</span>
+						)}
+						{errors.name && errors.name.type === 'maxLength' && (
+							<span>Please use less than 20 characters</span>
+						)}
+					</InputSingleContainer>
+					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">
 							title
 						</Label>

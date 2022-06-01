@@ -42,6 +42,7 @@ export default function Product(props) {
 
 function ProductModeShow({
 	id,
+	name,
 	title,
 	detail,
 	email,
@@ -61,6 +62,7 @@ function ProductModeShow({
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
+				<Typography variant="p">{name}</Typography>
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 
@@ -84,7 +86,16 @@ function ProductModeShow({
 	);
 }
 
-function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
+function ProductModeEdit({
+	id,
+	name,
+	title,
+	detail,
+	email,
+	image,
+	onDisableEditMode,
+	onUpdateProduct,
+}) {
 	const {
 		setValue,
 		register,
@@ -93,6 +104,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 	} = useForm();
 
 	useEffect(() => {
+		setValue('name', name);
 		setValue('title', title);
 		setValue('detail', detail);
 		setValue('image', image);
@@ -163,6 +175,24 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 								/>
 							</ImageWrapper>
 						</ImageContainer>
+					</InputSingleContainer>
+					<InputSingleContainer>
+						<Label htmlFor="name">name</Label>
+						<Input
+							id="name"
+							type="text"
+							aria-invalid={errors.name ? 'true' : 'false'}
+							{...register('name', {
+								required: true,
+								maxLength: 20,
+							})}
+						/>
+						{errors.name && errors.name.type === 'required' && (
+							<span>please enter your name</span>
+						)}
+						{errors.name && errors.name.type === 'maxLength' && (
+							<span>Please use less than 20 characters</span>
+						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>

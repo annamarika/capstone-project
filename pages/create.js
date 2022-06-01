@@ -26,6 +26,7 @@ export default function Create({ initialProduct }) {
 			...products,
 			{
 				id: nanoid(),
+				name: newdata.name,
 				title: newdata.title,
 				detail: newdata.detail,
 				image: newdata.image,

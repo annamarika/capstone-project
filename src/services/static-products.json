@@ -1,6 +1,7 @@
 [
   {
     "id": "1234",
+    "name": "Anna",
     "title": "red dress",
     "detail": "Cute red dress. Perfect for a summer party. Almost new. Size 36. Brand Zara. Cologne. ",
     "image": "capstone/poldq9fc4vzrosbtl2zu",
@@ -9,6 +10,7 @@
   },
   {
     "id": "1235",
+    "name": "Mona",
     "title": "lv bag",
     "detail": "LV bag. Perfect as Clutch or Shoulderbag. brand new. Brand LV. Munich. ",
     "image": "capstone/f7hmyou5lsd8b2bk5aqe",
@@ -17,6 +19,7 @@
   },
   {
     "id": "1236",
+    "name": "Lisa",
     "title": "nike sneaker",
     "detail": "Green velvet nike Shoes. Trendy. Worn. Size 40. Brand Nike. Berlin. ",
     "image": "capstone/rj66vnknxgisi4o3ypun",
@@ -25,6 +28,7 @@
   },
   {
     "id": "1237",
+    "name": "Anna",
     "title": "Golden Bracelet",
     "detail": "Golden Bracelet. Posh. granny old but still nice. Brand unknown. Hamburg. ",
     "image": "capstone/q0179kg52li4cv1vziz1",
