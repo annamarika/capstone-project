@@ -7,7 +7,7 @@ describe('Form', () => {
 	it('renders 4 inputfields and a submit button', () => {
 		render(<Form />);
 
-		const imageUrlInput = screen.getByLabelText(/image url/i);
+		const imageUrlInput = screen.getByLabelText(/image upload/i);
 		const titleInput = screen.getByLabelText(/title/i);
 		const detailInput = screen.getByLabelText(/detail/i);
 		const emailInput = screen.getByLabelText(/email/i);

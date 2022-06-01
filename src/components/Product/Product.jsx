@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import Typography from '../UI/Typography';
 import Container from '../UI/StyledContainer';
-import ImageWrapper from '../UI/StyledImageWrapper';
+import ImageWrapper from '../UI/Image/StyledImageWrapper';
 import TextWrapper from '../UI/StyledTextWrapper';
 import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
@@ -15,6 +15,9 @@ import ButtonContainer from '../UI/Button/StyledButtonContainer';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import ImageContainer from '../UI/Image/StyledImageContainer';
+import InputFile from '../UI/Form/StyledInputFile';
+import LabelUpload from '../UI/Form/StyledLableUpload';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -51,8 +54,9 @@ function ProductModeShow({
 		onDeleteProduct(id);
 	};
 	const { asPath } = useRouter();
+
 	return (
-		<Container>
+		<Container variant="product">
 			<ImageWrapper>
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
@@ -60,7 +64,13 @@ function ProductModeShow({
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 
-				{asPath !== '/profile' && <DefaultButton>{email}</DefaultButton>}
+				{asPath !== '/profile' && (
+					<DefaultButton>
+						<Typography href={`mailto:${email}`} variant="a">
+							email
+						</Typography>
+					</DefaultButton>
+				)}
 				{asPath !== '/products' && (
 					<DefaultButton onClick={handleDelete}>delete</DefaultButton>
 				)}
@@ -89,7 +99,35 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 		setValue('email', email);
 	}, []);
 
+	const CLOUD = process.env.CLOUDINARY_CLOUD;
+
+	const PRESET = process.env.CLOUDINARY_PRESET;
+
+	const [previewImage, setPreviewImage] = useState(image);
+
+	const uploadImage = async event => {
+		try {
+			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
+			const image = event.target.files[0];
+
+			const fileData = new FormData();
+			fileData.append('file', image);
+			fileData.append('upload_preset', PRESET);
+
+			const response = await fetch(url, {
+				method: 'POST',
+				body: fileData,
+			});
+			const translation = await response.json();
+			const newImage = translation.public_id;
+			setPreviewImage(newImage);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	const onSubmit = data => {
+		data.image = previewImage;
 		onUpdateProduct(id, data);
 		onDisableEditMode();
 	};
@@ -98,19 +136,33 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 		<FormContainer>
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
-					<InputSingleContainer>
-						<Label htmlFor="image">image url</Label>
-						<Input
+					<InputSingleContainer variant="upload">
+						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
+						<InputFile
 							id="image"
-							type="url"
+							type="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,
 							})}
+							onChange={uploadImage}
 						/>
-						{errors.imageValue && errors.imageValue.type === 'required' && (
-							<span>please enter a valid url</span>
+						{errors.image && errors.image.type === 'required' && (
+							<span>please select a file</span>
 						)}
+						<ImageContainer>
+							<Typography variant="pUpload">
+								for best quality {'->'} please use upright images only
+							</Typography>
+							<ImageWrapper variant="placeholder">
+								<Image
+									alt={title}
+									src={previewImage}
+									layout="fill"
+									objectFit="cover"
+								/>
+							</ImageWrapper>
+						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>

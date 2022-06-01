@@ -2,9 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Form from '../src/components/Form/Form';
 import { nanoid } from 'nanoid';
 import { saveToLocal, loadFromLocal } from '../src/components/lib/localStorage';
+import { getProducts } from '../src/services/get-products';
 
-export default function Create() {
-	const [products, setProducts] = useState(loadFromLocal('localProducts'));
+export function getStaticProps() {
+	const initialProduct = getProducts();
+
+	return {
+		props: {
+			initialProduct,
+		},
+	};
+}
+
+export default function Create({ initialProduct }) {
+	const [products, setProducts] = useState(loadFromLocal('localProducts', initialProduct));
 
 	useEffect(() => {
 		saveToLocal('localProducts', products);

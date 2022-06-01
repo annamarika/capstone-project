@@ -4,8 +4,13 @@ const nextConfig = {
 	compiler: {
 		styledComponents: true,
 	},
+	env: {
+		CLOUDINARY_PRESET: process.env.CLOUDINARY_PRESET,
+		CLOUDINARY_CLOUD: process.env.CLOUDINARY_CLOUD,
+	},
 	images: {
-		domains: ['images.unsplash.com'],
+		loader: 'cloudinary',
+		path: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD}/image/upload/`,
 	},
 };
 

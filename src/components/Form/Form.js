@@ -8,6 +8,12 @@ import InputSingleContainer from '../UI/Form/StyledInputSingleContainer';
 import Label from '../UI/Form/StyledLable';
 import Input from '../UI/Form/StyledInput';
 import ButtonContainer from '../UI/Button/StyledButtonContainer';
+import Image from 'next/image';
+import ImageWrapper from '../UI/Image/StyledImageWrapper';
+import Typography from '../UI/Typography';
+import ImageContainer from '../UI/Image/StyledImageContainer';
+import InputFile from '../UI/Form/StyledInputFile';
+import LabelUpload from '../UI/Form/StyledLableUpload';
 
 export default function Form({ onAddProduct }) {
 	const {
@@ -17,7 +23,46 @@ export default function Form({ onAddProduct }) {
 		formState: { errors },
 	} = useForm();
 
+	const CLOUD = process.env.CLOUDINARY_CLOUD;
+
+	const PRESET = process.env.CLOUDINARY_PRESET;
+
+	const placeholderImage = {
+		secure_url: 'capstone/poldq9fc4vzrosbtl2zu',
+		width: 120,
+		height: 180,
+	};
+
+	const [previewImage, setPreviewImage] = useState(placeholderImage);
+
+	const uploadImage = async event => {
+		try {
+			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
+			const image = event.target.files[0];
+
+			const fileData = new FormData();
+			fileData.append('file', image);
+			fileData.append('upload_preset', PRESET);
+
+			const response = await fetch(url, {
+				method: 'POST',
+				body: fileData,
+			});
+			const translation = await response.json();
+			const newImage = {
+				secure_url: translation.public_id,
+				width: translation.width,
+				height: translation.height,
+			};
+			setPreviewImage(newImage);
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
 	const onSubmit = data => {
+		data.image = previewImage.secure_url;
+
 		onAddProduct(data);
 		reset();
 		handleClick();
@@ -31,30 +76,45 @@ export default function Form({ onAddProduct }) {
 
 		setTimeout(() => {
 			setButtonText(initialButtonText);
-		}, 1000);
+		}, 2000);
 	};
 
 	return (
 		<FormContainer>
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
-					<InputSingleContainer>
-						<Label htmlFor="image">image url</Label>
-						<Input
+					<InputSingleContainer variant="upload">
+						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
+						<InputFile
 							id="image"
-							type="url"
+							type="file"
 							aria-invalid={errors.image ? 'true' : 'false'}
 							{...register('image', {
 								required: true,
 							})}
-							placeholder="Add image URL"
+							onChange={uploadImage}
 						/>
 						{errors.image && errors.image.type === 'required' && (
-							<span>please enter a valid url</span>
+							<span>please select a file</span>
 						)}
+						<ImageContainer>
+							<Typography variant="pUpload">
+								for best quality {'->'} please use upright images only
+							</Typography>
+							<ImageWrapper variant="placeholder">
+								<Image
+									alt="placeholder"
+									src={previewImage.secure_url}
+									layout="fill"
+									objectFit="cover"
+								/>
+							</ImageWrapper>
+						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="title">title</Label>
+						<Label htmlFor="title" variant="headline">
+							title
+						</Label>
 						<Input
 							id="title"
 							type="text"
@@ -63,7 +123,7 @@ export default function Form({ onAddProduct }) {
 								required: true,
 								maxLength: 20,
 							})}
-							placeholder="short discriping title"
+							placeholder="..."
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -73,7 +133,9 @@ export default function Form({ onAddProduct }) {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="detail">detail</Label>
+						<Label htmlFor="detail" variant="headline">
+							detail
+						</Label>
 						<Input
 							id="detail"
 							type="text"
@@ -82,7 +144,7 @@ export default function Form({ onAddProduct }) {
 								required: true,
 								maxLength: 170,
 							})}
-							placeholder="Add important details"
+							placeholder="..."
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -92,7 +154,9 @@ export default function Form({ onAddProduct }) {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="email">email</Label>
+						<Label htmlFor="email" variant="headline">
+							email
+						</Label>
 						<Input
 							id="email"
 							type="email"

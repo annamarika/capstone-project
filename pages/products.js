@@ -18,7 +18,7 @@ export default function Products({ initialProduct }) {
 		ssr: false,
 	});
 
-	const [products, setProducts] = useState(loadFromLocal('localProducts') ?? initialProduct);
+	const [products, setProducts] = useState(loadFromLocal('localProducts', initialProduct));
 
 	useEffect(() => {
 		saveToLocal('localProducts', products);
