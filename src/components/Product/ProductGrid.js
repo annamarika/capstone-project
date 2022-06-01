@@ -1,11 +1,17 @@
 import Product from './Product';
 import UList from '../UI/StyledUList';
 import ProductLi from '../UI/StyledList';
+import useSWR from 'swr';
+import Typography from '../UI/Typography';
 
-export default function ProductGrid({ products, onDeleteProduct, onUpdateProduct }) {
+export default function ProductGrid() {
+	const { data, error } = useSWR('/api/products');
+	if (error) {
+		return <Typography variant="p">Error: {error.message}</Typography>;
+	}
 	return (
 		<UList>
-			{products.map(product => (
+			{data.map(product => (
 				<ProductLi key={product.id}>
 					<Product
 						id={product.id}
@@ -14,8 +20,6 @@ export default function ProductGrid({ products, onDeleteProduct, onUpdateProduct
 						detail={product.detail}
 						email={product.email}
 						image={product.image}
-						onDeleteProduct={onDeleteProduct}
-						onUpdateProduct={onUpdateProduct}
 					/>
 				</ProductLi>
 			))}

@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import ImageContainer from '../UI/Image/StyledImageContainer';
 import InputFile from '../UI/Form/StyledInputFile';
 import LabelUpload from '../UI/Form/StyledLableUpload';
+import { useSWRConfig } from 'swr';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -40,20 +41,8 @@ export default function Product(props) {
 	);
 }
 
-function ProductModeShow({
-	id,
-	name,
-	title,
-	detail,
-	email,
-	image,
-	altText,
-	onDeleteProduct,
-	onEnableEditMode,
-}) {
-	const handleDelete = () => {
-		onDeleteProduct(id);
-	};
+function ProductModeShow({ id, name, title, detail, email, image, altText, onEnableEditMode }) {
+	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
 
 	return (
@@ -74,7 +63,17 @@ function ProductModeShow({
 					</DefaultButton>
 				)}
 				{asPath !== '/products' && (
-					<DefaultButton onClick={handleDelete}>delete</DefaultButton>
+					<DefaultButton
+						onClick={async () => {
+							const response = await fetch('/api/product/' + id, {
+								method: 'DELETE',
+							});
+							console.log(await response.json());
+							mutate('/api/products');
+						}}
+					>
+						delete
+					</DefaultButton>
 				)}
 				{asPath !== '/products' && (
 					<DefaultButton variant="hide" onClick={onEnableEditMode}>
@@ -86,16 +85,14 @@ function ProductModeShow({
 	);
 }
 
-function ProductModeEdit({
-	id,
-	name,
-	title,
-	detail,
-	email,
-	image,
-	onDisableEditMode,
-	onUpdateProduct,
-}) {
+function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditMode }) {
+	const [imageValue, setImageValue] = useState(image);
+	const [nameValue, setNameValue] = useState(name);
+	const [titleValue, setTitleValue] = useState(title);
+	const [detailValue, setDetailValue] = useState(detail);
+	const [emailValue, setEmailValue] = useState(email);
+	const { mutate } = useSWRConfig();
+
 	const {
 		setValue,
 		register,
@@ -138,9 +135,24 @@ function ProductModeEdit({
 		}
 	};
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
+		console.log(id, imageValue, nameValue, titleValue, detailValue, emailValue);
+
+		const response = await fetch('/api/product/' + id, {
+			method: 'PUT',
+			body: JSON.stringify({
+				image: imageValue,
+				name: nameValue,
+				title: titleValue,
+				detail: detailValue,
+				email: emailValue,
+			}),
+		});
+		console.log(await response.json());
+		mutate('/api/products');
+
 		data.image = previewImage;
-		onUpdateProduct(id, data);
+
 		onDisableEditMode();
 	};
 
@@ -157,7 +169,10 @@ function ProductModeEdit({
 							{...register('image', {
 								required: true,
 							})}
-							onChange={uploadImage}
+							onChange={event => {
+								uploadImage();
+								setImageValue(event.target.value);
+							}}
 						/>
 						{errors.image && errors.image.type === 'required' && (
 							<span>please select a file</span>
@@ -186,6 +201,9 @@ function ProductModeEdit({
 								required: true,
 								maxLength: 20,
 							})}
+							onChange={event => {
+								setNameValue(event.target.value);
+							}}
 						/>
 						{errors.name && errors.name.type === 'required' && (
 							<span>please enter your name</span>
@@ -205,6 +223,9 @@ function ProductModeEdit({
 								maxLength: 20,
 							})}
 							placeholder="short discriping title"
+							onChange={event => {
+								setTitleValue(event.target.value);
+							}}
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -223,6 +244,9 @@ function ProductModeEdit({
 								required: true,
 								maxLength: 170,
 							})}
+							onChange={event => {
+								setDetailValue(event.target.value);
+							}}
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -241,6 +265,9 @@ function ProductModeEdit({
 								required: true,
 								maxLength: 60,
 							})}
+							onChange={event => {
+								setEmailValue(event.target.value);
+							}}
 						/>
 						{errors.email && errors.email.type === 'required' && (
 							<span>please enter a valid email</span>
@@ -252,9 +279,7 @@ function ProductModeEdit({
 				</InputContainer>
 				<ButtonContainer>
 					<DefaultButton type="submit">save</DefaultButton>
-					<DefaultButton type="button" onClick={onDisableEditMode}>
-						cancel
-					</DefaultButton>
+					<DefaultButton type="button">cancel</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>

@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
 import FormElement from '../UI/Form/StyledFormElement';
@@ -22,7 +21,6 @@ export default function Form() {
 	const [titleValue, setTitleValue] = useState('');
 	const [detailValue, setDetailValue] = useState('');
 	const [emailValue, setEmailValue] = useState('');
-	const router = useRouter();
 
 	const {
 		reset,
@@ -83,7 +81,6 @@ export default function Form() {
 		});
 
 		console.log(await response.json());
-		router.push('/products');
 
 		data.image = previewImage.secure_url;
 
