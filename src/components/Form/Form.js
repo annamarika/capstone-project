@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import DefaultButton from '../UI/Button/StyledButton';
 import FormContainer from '../UI/Form/StyledFormContainer';
 import FormElement from '../UI/Form/StyledFormElement';
@@ -15,7 +16,14 @@ import ImageContainer from '../UI/Image/StyledImageContainer';
 import InputFile from '../UI/Form/StyledInputFile';
 import LabelUpload from '../UI/Form/StyledLableUpload';
 
-export default function Form({ onAddProduct }) {
+export default function Form() {
+	const [imageValue, setImageValue] = useState('');
+	const [nameValue, setNameValue] = useState('');
+	const [titleValue, setTitleValue] = useState('');
+	const [detailValue, setDetailValue] = useState('');
+	const [emailValue, setEmailValue] = useState('');
+	const router = useRouter();
+
 	const {
 		reset,
 		register,
@@ -60,10 +68,25 @@ export default function Form({ onAddProduct }) {
 		}
 	};
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
+		console.log(imageValue, nameValue, titleValue, detailValue, emailValue);
+
+		const response = await fetch('/api/product/create/', {
+			method: 'POST',
+			body: JSON.stringify({
+				image: imageValue,
+				name: nameValue,
+				title: titleValue,
+				detail: detailValue,
+				email: emailValue,
+			}),
+		});
+
+		console.log(await response.json());
+		router.push('/products');
+
 		data.image = previewImage.secure_url;
 
-		onAddProduct(data);
 		reset();
 		handleClick();
 	};
@@ -92,7 +115,10 @@ export default function Form({ onAddProduct }) {
 							{...register('image', {
 								required: true,
 							})}
-							onChange={uploadImage}
+							onChange={event => {
+								uploadImage();
+								setImageValue(event.target.value);
+							}}
 						/>
 						{errors.image && errors.image.type === 'required' && (
 							<span>please select a file</span>
@@ -122,6 +148,9 @@ export default function Form({ onAddProduct }) {
 								maxLength: 20,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setNameValue(event.target.value);
+							}}
 						/>
 						{errors.name && errors.name.type === 'required' && (
 							<span>please enter your name</span>
@@ -143,6 +172,9 @@ export default function Form({ onAddProduct }) {
 								maxLength: 20,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setTitleValue(event.target.value);
+							}}
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -164,6 +196,9 @@ export default function Form({ onAddProduct }) {
 								maxLength: 170,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setDetailValue(event.target.value);
+							}}
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -185,6 +220,9 @@ export default function Form({ onAddProduct }) {
 								maxLength: 60,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setEmailValue(event.target.value);
+							}}
 						/>
 						{errors.email && errors.email.type === 'required' && (
 							<span>please enter a valid email</span>
