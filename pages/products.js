@@ -1,6 +1,6 @@
 import { getProducts } from '../src/services/get-products';
-import ProductGrid from '../src/components/Product/ProductGrid';
-import { swrFetcher } from '../src/components/lib/swr-fetcher';
+import ProductGrid from '../src/Components/Product/ProductGrid';
+import { swrFetcher } from '../src/Components/lib/swr-fetcher';
 import { SWRConfig } from 'swr';
 
 export async function getStaticProps() {
