@@ -138,6 +138,7 @@ export default function Form() {
 							aria-invalid={errors.name ? 'true' : 'false'}
 							{...register('name', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							placeholder="..."
@@ -162,6 +163,7 @@ export default function Form() {
 							aria-invalid={errors.title ? 'true' : 'false'}
 							{...register('title', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							placeholder="..."
@@ -186,6 +188,7 @@ export default function Form() {
 							aria-invalid={errors.detail ? 'true' : 'false'}
 							{...register('detail', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
 							placeholder="..."
@@ -210,6 +213,7 @@ export default function Form() {
 							aria-invalid={errors.email ? 'true' : 'false'}
 							{...register('email', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
 							placeholder="..."

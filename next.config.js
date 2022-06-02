@@ -13,6 +13,7 @@ const nextConfig = {
 		loader: 'cloudinary',
 		path: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD}/image/upload/`,
 	},
+	swcMinify: false,
 };
 
 module.exports = nextConfig;

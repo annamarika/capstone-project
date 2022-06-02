@@ -191,6 +191,7 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 							aria-invalid={errors.name ? 'true' : 'false'}
 							{...register('name', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							onChange={event => {
@@ -212,6 +213,7 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 							aria-invalid={errors.title ? 'true' : 'false'}
 							{...register('title', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							placeholder="short discriping title"
@@ -234,6 +236,7 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 							aria-invalid={errors.detail ? 'true' : 'false'}
 							{...register('detail', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
 							onChange={event => {
@@ -255,6 +258,7 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 							aria-invalid={errors.email ? 'true' : 'false'}
 							{...register('email', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
 							onChange={event => {
