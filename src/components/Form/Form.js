@@ -16,7 +16,6 @@ import InputFile from '../UI/Form/StyledInputFile';
 import LabelUpload from '../UI/Form/StyledLableUpload';
 
 export default function Form() {
-	const [imageValue, setImageValue] = useState('');
 	const [nameValue, setNameValue] = useState('');
 	const [titleValue, setTitleValue] = useState('');
 	const [detailValue, setDetailValue] = useState('');
@@ -67,12 +66,12 @@ export default function Form() {
 	};
 
 	const onSubmit = async data => {
-		console.log(imageValue, nameValue, titleValue, detailValue, emailValue);
+		console.log(previewImage, nameValue, titleValue, detailValue, emailValue);
 
 		const response = await fetch('/api/product/create/', {
 			method: 'POST',
 			body: JSON.stringify({
-				image: imageValue,
+				image: previewImage.secure_url,
 				name: nameValue,
 				title: titleValue,
 				detail: detailValue,
@@ -114,7 +113,6 @@ export default function Form() {
 							})}
 							onChange={event => {
 								uploadImage(event);
-								setImageValue(event.target.value);
 							}}
 						/>
 						{errors.image && errors.image.type === 'required' && (

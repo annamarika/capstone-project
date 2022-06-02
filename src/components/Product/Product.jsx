@@ -42,6 +42,7 @@ export default function Product(props) {
 }
 
 function ProductModeShow({ id, name, title, detail, email, image, altText, onEnableEditMode }) {
+	console.log(image);
 	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
 
@@ -86,7 +87,6 @@ function ProductModeShow({ id, name, title, detail, email, image, altText, onEna
 }
 
 function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditMode }) {
-	const [imageValue, setImageValue] = useState(image);
 	const [nameValue, setNameValue] = useState(name);
 	const [titleValue, setTitleValue] = useState(title);
 	const [detailValue, setDetailValue] = useState(detail);
@@ -136,12 +136,10 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 	};
 
 	const onSubmit = async data => {
-		console.log(id, imageValue, nameValue, titleValue, detailValue, emailValue);
-
 		const response = await fetch('/api/product/' + id, {
 			method: 'PUT',
 			body: JSON.stringify({
-				image: imageValue,
+				image: previewImage,
 				name: nameValue,
 				title: titleValue,
 				detail: detailValue,
@@ -171,7 +169,6 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 							})}
 							onChange={event => {
 								uploadImage(event);
-								setImageValue(event.target.value);
 							}}
 						/>
 						{errors.image && errors.image.type === 'required' && (

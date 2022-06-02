@@ -7,6 +7,7 @@ const nextConfig = {
 	env: {
 		CLOUDINARY_PRESET: process.env.CLOUDINARY_PRESET,
 		CLOUDINARY_CLOUD: process.env.CLOUDINARY_CLOUD,
+		MONGODB_URI: process.env.MONGODB_URI,
 	},
 	images: {
 		loader: 'cloudinary',
