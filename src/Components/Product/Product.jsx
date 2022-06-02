@@ -163,17 +163,12 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 						<InputFile
 							id="image"
 							type="file"
-							aria-invalid={errors.image ? 'true' : 'false'}
-							{...register('image', {
-								required: true,
-							})}
+							{...register('image', {})}
 							onChange={event => {
 								uploadImage(event);
 							}}
 						/>
-						{errors.image && errors.image.type === 'required' && (
-							<span>please select a file</span>
-						)}
+
 						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
@@ -276,7 +271,9 @@ function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditM
 				</InputContainer>
 				<ButtonContainer>
 					<DefaultButton type="submit">save</DefaultButton>
-					<DefaultButton type="button">cancel</DefaultButton>
+					<DefaultButton type="button" onClick={onDisableEditMode}>
+						cancel
+					</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>

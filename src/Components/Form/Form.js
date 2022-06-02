@@ -66,8 +66,6 @@ export default function Form() {
 	};
 
 	const onSubmit = async data => {
-		console.log(previewImage, nameValue, titleValue, detailValue, emailValue);
-
 		const response = await fetch('/api/product/create/', {
 			method: 'POST',
 			body: JSON.stringify({
