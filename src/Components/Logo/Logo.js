@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Typography from '../UI/Typography';
+import LogoButton from '../Button/LogoButton';
 
 export default function Logo() {
 	return (
@@ -10,9 +10,7 @@ export default function Logo() {
 			</TopLeft>
 			<Bottom>
 				<BottomWhite>
-					<LogoContainer>
-						<Typography variant="h1">welcome friend</Typography>
-					</LogoContainer>
+					<LogoButton />
 				</BottomWhite>
 			</Bottom>
 			<Legs>
@@ -22,12 +20,6 @@ export default function Logo() {
 		</LogoBG>
 	);
 }
-
-const LogoContainer = styled.div`
-	position: absolute;
-	left: 20px;
-	padding: 10px;
-`;
 
 const LogoBG = styled.div`
 	display: flow-root;
@@ -88,6 +80,8 @@ const BottomWhite = styled.div`
 	top: 15px;
 	transition: booky 1s;
 	animation: BottomWhiteAnimation 2s ease-in;
+	display: flex;
+	justify-content: center;
 `;
 
 const Legs = styled.div`
