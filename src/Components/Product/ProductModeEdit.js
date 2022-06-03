@@ -96,7 +96,6 @@ export default function ProductModeEdit({
 								uploadImage(event);
 							}}
 						/>
-
 						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
