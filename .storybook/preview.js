@@ -1,4 +1,4 @@
-import GlobalStyle from "../src/components/UI/GlobalStyle"
+import GlobalStyle from "../src/Components/UI/GlobalStyle"
 import * as NextImage from "next/image";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 

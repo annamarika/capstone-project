@@ -1,5 +1,17 @@
-import data from './static-products.json';
+import { dbConnect } from '../Components/lib/database';
+import Product from '../models/Product';
 
-export const getProducts = () => {
-	return data;
+export const getProducts = async () => {
+	await dbConnect();
+	const data = await Product.find();
+	console.log(data);
+
+	return data.map(({ id, image, name, title, detail, email }) => ({
+		id,
+		image,
+		name,
+		title,
+		detail,
+		email,
+	}));
 };

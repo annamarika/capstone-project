@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import ImageContainer from '../UI/Image/StyledImageContainer';
 import InputFile from '../UI/Form/StyledInputFile';
 import LabelUpload from '../UI/Form/StyledLableUpload';
+import { useSWRConfig } from 'swr';
 
 export default function Product(props) {
 	const [isEditMode, setIsEditMode] = useState(false);
@@ -40,19 +41,9 @@ export default function Product(props) {
 	);
 }
 
-function ProductModeShow({
-	id,
-	title,
-	detail,
-	email,
-	image,
-	altText,
-	onDeleteProduct,
-	onEnableEditMode,
-}) {
-	const handleDelete = () => {
-		onDeleteProduct(id);
-	};
+function ProductModeShow({ id, name, title, detail, email, image, altText, onEnableEditMode }) {
+	console.log(image);
+	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
 
 	return (
@@ -61,6 +52,7 @@ function ProductModeShow({
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
+				<Typography variant="p">{name}</Typography>
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 
@@ -72,7 +64,17 @@ function ProductModeShow({
 					</DefaultButton>
 				)}
 				{asPath !== '/products' && (
-					<DefaultButton onClick={handleDelete}>delete</DefaultButton>
+					<DefaultButton
+						onClick={async () => {
+							const response = await fetch('/api/product/' + id, {
+								method: 'DELETE',
+							});
+							console.log(await response.json());
+							mutate('/api/products');
+						}}
+					>
+						delete
+					</DefaultButton>
 				)}
 				{asPath !== '/products' && (
 					<DefaultButton variant="hide" onClick={onEnableEditMode}>
@@ -84,7 +86,13 @@ function ProductModeShow({
 	);
 }
 
-function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, onUpdateProduct }) {
+function ProductModeEdit({ id, name, title, detail, email, image, onDisableEditMode }) {
+	const [nameValue, setNameValue] = useState(name);
+	const [titleValue, setTitleValue] = useState(title);
+	const [detailValue, setDetailValue] = useState(detail);
+	const [emailValue, setEmailValue] = useState(email);
+	const { mutate } = useSWRConfig();
+
 	const {
 		setValue,
 		register,
@@ -93,6 +101,7 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 	} = useForm();
 
 	useEffect(() => {
+		setValue('name', name);
 		setValue('title', title);
 		setValue('detail', detail);
 		setValue('image', image);
@@ -126,9 +135,22 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 		}
 	};
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
+		const response = await fetch('/api/product/' + id, {
+			method: 'PUT',
+			body: JSON.stringify({
+				image: previewImage,
+				name: nameValue,
+				title: titleValue,
+				detail: detailValue,
+				email: emailValue,
+			}),
+		});
+		console.log(await response.json());
+		mutate('/api/products');
+
 		data.image = previewImage;
-		onUpdateProduct(id, data);
+
 		onDisableEditMode();
 	};
 
@@ -141,15 +163,12 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 						<InputFile
 							id="image"
 							type="file"
-							aria-invalid={errors.image ? 'true' : 'false'}
-							{...register('image', {
-								required: true,
-							})}
-							onChange={uploadImage}
+							{...register('image', {})}
+							onChange={event => {
+								uploadImage(event);
+							}}
 						/>
-						{errors.image && errors.image.type === 'required' && (
-							<span>please select a file</span>
-						)}
+
 						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
@@ -165,6 +184,28 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
+						<Label htmlFor="name">name</Label>
+						<Input
+							id="name"
+							type="text"
+							aria-invalid={errors.name ? 'true' : 'false'}
+							{...register('name', {
+								required: true,
+								pattern: /\S(.*\S)?/,
+								maxLength: 20,
+							})}
+							onChange={event => {
+								setNameValue(event.target.value);
+							}}
+						/>
+						{errors.name && errors.name.type === 'required' && (
+							<span>please enter your name</span>
+						)}
+						{errors.name && errors.name.type === 'maxLength' && (
+							<span>Please use less than 20 characters</span>
+						)}
+					</InputSingleContainer>
+					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>
 						<Input
 							id="title"
@@ -172,9 +213,13 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 							aria-invalid={errors.title ? 'true' : 'false'}
 							{...register('title', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							placeholder="short discriping title"
+							onChange={event => {
+								setTitleValue(event.target.value);
+							}}
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -191,8 +236,12 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 							aria-invalid={errors.detail ? 'true' : 'false'}
 							{...register('detail', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
+							onChange={event => {
+								setDetailValue(event.target.value);
+							}}
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -209,8 +258,12 @@ function ProductModeEdit({ id, title, detail, email, image, onDisableEditMode, o
 							aria-invalid={errors.email ? 'true' : 'false'}
 							{...register('email', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
+							onChange={event => {
+								setEmailValue(event.target.value);
+							}}
 						/>
 						{errors.email && errors.email.type === 'required' && (
 							<span>please enter a valid email</span>

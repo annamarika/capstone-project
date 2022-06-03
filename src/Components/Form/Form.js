@@ -15,7 +15,12 @@ import ImageContainer from '../UI/Image/StyledImageContainer';
 import InputFile from '../UI/Form/StyledInputFile';
 import LabelUpload from '../UI/Form/StyledLableUpload';
 
-export default function Form({ onAddProduct }) {
+export default function Form() {
+	const [nameValue, setNameValue] = useState('');
+	const [titleValue, setTitleValue] = useState('');
+	const [detailValue, setDetailValue] = useState('');
+	const [emailValue, setEmailValue] = useState('');
+
 	const {
 		reset,
 		register,
@@ -60,10 +65,22 @@ export default function Form({ onAddProduct }) {
 		}
 	};
 
-	const onSubmit = data => {
+	const onSubmit = async data => {
+		const response = await fetch('/api/product/create/', {
+			method: 'POST',
+			body: JSON.stringify({
+				image: previewImage.secure_url,
+				name: nameValue,
+				title: titleValue,
+				detail: detailValue,
+				email: emailValue,
+			}),
+		});
+
+		console.log(await response.json());
+
 		data.image = previewImage.secure_url;
 
-		onAddProduct(data);
 		reset();
 		handleClick();
 	};
@@ -92,7 +109,9 @@ export default function Form({ onAddProduct }) {
 							{...register('image', {
 								required: true,
 							})}
-							onChange={uploadImage}
+							onChange={event => {
+								uploadImage(event);
+							}}
 						/>
 						{errors.image && errors.image.type === 'required' && (
 							<span>please select a file</span>
@@ -112,6 +131,29 @@ export default function Form({ onAddProduct }) {
 						</ImageContainer>
 					</InputSingleContainer>
 					<InputSingleContainer>
+						<Label htmlFor="name">name</Label>
+						<Input
+							id="name"
+							type="text"
+							aria-invalid={errors.name ? 'true' : 'false'}
+							{...register('name', {
+								required: true,
+								pattern: /\S(.*\S)?/,
+								maxLength: 20,
+							})}
+							placeholder="..."
+							onChange={event => {
+								setNameValue(event.target.value);
+							}}
+						/>
+						{errors.name && errors.name.type === 'required' && (
+							<span>please enter your name</span>
+						)}
+						{errors.name && errors.name.type === 'maxLength' && (
+							<span>Please use less than 20 characters</span>
+						)}
+					</InputSingleContainer>
+					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">
 							title
 						</Label>
@@ -121,9 +163,13 @@ export default function Form({ onAddProduct }) {
 							aria-invalid={errors.title ? 'true' : 'false'}
 							{...register('title', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setTitleValue(event.target.value);
+							}}
 						/>
 						{errors.title && errors.title.type === 'required' && (
 							<span>please enter a short title</span>
@@ -142,9 +188,13 @@ export default function Form({ onAddProduct }) {
 							aria-invalid={errors.detail ? 'true' : 'false'}
 							{...register('detail', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setDetailValue(event.target.value);
+							}}
 						/>
 						{errors.detail && errors.detail.type === 'required' && (
 							<span>please enter the details</span>
@@ -163,9 +213,13 @@ export default function Form({ onAddProduct }) {
 							aria-invalid={errors.email ? 'true' : 'false'}
 							{...register('email', {
 								required: true,
+								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
 							placeholder="..."
+							onChange={event => {
+								setEmailValue(event.target.value);
+							}}
 						/>
 						{errors.email && errors.email.type === 'required' && (
 							<span>please enter a valid email</span>
