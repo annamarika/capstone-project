@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
-import DefaultButton from '../UI/Button/StyledButton';
-import ImageWrapper from '../UI/Image/StyledImageWrapper';
-import Container from '../UI/StyledContainer';
-import TextWrapper from '../UI/StyledTextWrapper';
+import DefaultButton from '../UI/Button/Button.styled';
+import ImageWrapper from '../UI/Image/ImageWrapper.styled';
+import Container from '../UI/Product/Container.styled';
+import TextWrapper from '../UI/Product/TextWrapper.styled';
 import Typography from '../UI/Typography';
 
 export default function ProductModeShow({

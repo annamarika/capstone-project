@@ -1,18 +1,18 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import FormContainer from '../UI/Form/StyledFormContainer';
-import FormElement from '../UI/Form/StyledFormElement';
-import InputContainer from '../UI/Form/StyledInputContainer';
-import InputSingleContainer from '../UI/Form/StyledInputSingleContainer';
-import Label from '../UI/Form/StyledLable';
-import Input from '../UI/Form/StyledInput';
-import ButtonContainer from '../UI/Button/StyledButtonContainer';
+import FormContainer from '../UI/Form/FormContainer.styled';
+import FormElement from '../UI/Form/FormElement.styled';
+import InputContainer from '../UI/Form/InputContainer.styled';
+import InputSingleContainer from '../UI/Form/InputSingleContainer.styled';
+import Label from '../UI/Form/Lable.styled';
+import Input from '../UI/Form/Input.styled';
+import ButtonContainer from '../UI/Button/ButtonContainer.styled';
 import Image from 'next/image';
-import ImageWrapper from '../UI/Image/StyledImageWrapper';
+import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
-import ImageContainer from '../UI/Image/StyledImageContainer';
-import InputFile from '../UI/Form/StyledInputFile';
-import LabelUpload from '../UI/Form/StyledLableUpload';
+import ImageContainer from '../UI/Image/ImageContainer.styled';
+import InputFile from '../UI/Form/InputFile.styled';
+import LabelUpload from '../UI/Form/LableUpload.styled';
 import CreateButton from '../Button/CreateButton';
 
 export default function Form() {

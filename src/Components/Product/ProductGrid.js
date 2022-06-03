@@ -1,6 +1,6 @@
 import Product from './Product';
-import UList from '../UI/StyledUList';
-import ProductLi from '../UI/StyledList';
+import UList from '../UI/Product/UList.styled';
+import ProductLi from '../UI/Product/List.styled';
 import useSWR from 'swr';
 import Typography from '../UI/Typography';
 

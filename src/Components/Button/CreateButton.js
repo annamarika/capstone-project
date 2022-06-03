@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import DefaultButton from '../UI/Button/StyledButton';
+import DefaultButton from '../UI/Button/Button.styled';
 
 export default function CreateButton() {
 	const initialButtonText = 'create';
