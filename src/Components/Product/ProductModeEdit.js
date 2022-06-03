@@ -1,39 +1,45 @@
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useSWRConfig } from 'swr';
+import DefaultButton from '../UI/Button/Button.styled';
+import ButtonContainer from '../UI/Button/ButtonContainer.styled';
 import FormContainer from '../UI/Form/FormContainer.styled';
 import FormElement from '../UI/Form/FormElement.styled';
+import Input from '../UI/Form/Input.styled';
 import InputContainer from '../UI/Form/InputContainer.styled';
+import InputFile from '../UI/Form/InputFile.styled';
 import InputSingleContainer from '../UI/Form/InputSingleContainer.styled';
 import Label from '../UI/Form/Lable.styled';
-import Input from '../UI/Form/Input.styled';
-import ButtonContainer from '../UI/Button/ButtonContainer.styled';
-import Image from 'next/image';
+import LabelUpload from '../UI/Form/LableUpload.styled';
+import ImageContainer from '../UI/Image/ImageContainer.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
-import ImageContainer from '../UI/Image/ImageContainer.styled';
-import InputFile from '../UI/Form/InputFile.styled';
-import LabelUpload from '../UI/Form/LableUpload.styled';
-import CreateButton from '../Button/CreateButton';
 
-export default function Form() {
-	const [nameValue, setNameValue] = useState('');
-	const [titleValue, setTitleValue] = useState('');
-	const [detailValue, setDetailValue] = useState('');
-	const [emailValue, setEmailValue] = useState('');
+export default function ProductModeEdit({
+	id,
+	name,
+	title,
+	detail,
+	email,
+	image,
+	onDisableEditMode,
+}) {
+	const [nameValue, setNameValue] = useState(name);
+	const [titleValue, setTitleValue] = useState(title);
+	const [detailValue, setDetailValue] = useState(detail);
+	const [emailValue, setEmailValue] = useState(email);
+	const { mutate } = useSWRConfig();
 	const {
-		reset,
+		setValue,
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+
 	const CLOUD = process.env.CLOUDINARY_CLOUD;
 	const PRESET = process.env.CLOUDINARY_PRESET;
-	const placeholderImage = {
-		secure_url: 'capstone/poldq9fc4vzrosbtl2zu',
-		width: 120,
-		height: 180,
-	};
-	const [previewImage, setPreviewImage] = useState(placeholderImage);
+	const [previewImage, setPreviewImage] = useState(image);
 	const uploadImage = async event => {
 		try {
 			const url = `https://api.cloudinary.com/v1_1/${CLOUD}/upload`;
@@ -46,33 +52,35 @@ export default function Form() {
 				body: fileData,
 			});
 			const translation = await response.json();
-			const newImage = {
-				secure_url: translation.public_id,
-				width: translation.width,
-				height: translation.height,
-			};
+			const newImage = translation.public_id;
 			setPreviewImage(newImage);
 		} catch (error) {
 			console.error(error.message);
 		}
 	};
-
 	const onSubmit = async data => {
-		const response = await fetch('/api/product/create/', {
-			method: 'POST',
+		const response = await fetch('/api/product/' + id, {
+			method: 'PUT',
 			body: JSON.stringify({
-				image: previewImage.secure_url,
+				image: previewImage,
 				name: nameValue,
 				title: titleValue,
 				detail: detailValue,
 				email: emailValue,
 			}),
 		});
-
 		console.log(await response.json());
-		data.image = previewImage.secure_url;
-		reset();
+		mutate('/api/products');
+		data.image = previewImage;
+		onDisableEditMode();
 	};
+	useEffect(() => {
+		setValue('name', name);
+		setValue('title', title);
+		setValue('detail', detail);
+		setValue('image', image);
+		setValue('email', email);
+	}, []);
 
 	return (
 		<FormContainer>
@@ -83,25 +91,19 @@ export default function Form() {
 						<InputFile
 							id="image"
 							type="file"
-							aria-invalid={errors.image ? 'true' : 'false'}
-							{...register('image', {
-								required: true,
-							})}
+							{...register('image', {})}
 							onChange={event => {
 								uploadImage(event);
 							}}
 						/>
-						{errors.image && errors.image.type === 'required' && (
-							<span>please select a file</span>
-						)}
 						<ImageContainer>
 							<Typography variant="pUpload">
 								for best quality {'->'} please use upright images only
 							</Typography>
 							<ImageWrapper variant="placeholder">
 								<Image
-									alt="placeholder"
-									src={previewImage.secure_url}
+									alt={title}
+									src={previewImage}
 									layout="fill"
 									objectFit="cover"
 								/>
@@ -119,7 +121,6 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
-							placeholder="..."
 							onChange={event => {
 								setNameValue(event.target.value);
 							}}
@@ -132,9 +133,7 @@ export default function Form() {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="title" variant="headline">
-							title
-						</Label>
+						<Label htmlFor="title">title</Label>
 						<Input
 							id="title"
 							type="text"
@@ -144,7 +143,7 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
-							placeholder="..."
+							placeholder="short discriping title"
 							onChange={event => {
 								setTitleValue(event.target.value);
 							}}
@@ -157,9 +156,7 @@ export default function Form() {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="detail" variant="headline">
-							detail
-						</Label>
+						<Label htmlFor="detail">detail</Label>
 						<Input
 							id="detail"
 							type="text"
@@ -169,7 +166,6 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
-							placeholder="..."
 							onChange={event => {
 								setDetailValue(event.target.value);
 							}}
@@ -182,9 +178,7 @@ export default function Form() {
 						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="email" variant="headline">
-							email
-						</Label>
+						<Label htmlFor="email">email</Label>
 						<Input
 							id="email"
 							type="email"
@@ -194,7 +188,6 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
-							placeholder="..."
 							onChange={event => {
 								setEmailValue(event.target.value);
 							}}
@@ -208,7 +201,10 @@ export default function Form() {
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>
-					<CreateButton />
+					<DefaultButton type="submit">save</DefaultButton>
+					<DefaultButton type="button" onClick={onDisableEditMode}>
+						cancel
+					</DefaultButton>
 				</ButtonContainer>
 			</FormElement>
 		</FormContainer>

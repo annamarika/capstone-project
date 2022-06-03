@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import FooterButton from '../UI/Footer/FooterButton';
-import FooterContainer from '../UI/Footer/FooterContainer';
-import FooterNav from '../UI/Footer/FooterNav';
+import FooterButton from '../UI/Footer/FooterButton.styled';
+import FooterContainer from '../UI/Footer/FooterContainer.styled';
+import FooterNav from '../UI/Footer/FooterNav.styled';
 import { useRouter } from 'next/router';
 
 import MySVG from '../UI/MySVG';
