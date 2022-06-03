@@ -15,4 +15,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --force
       - run: npm run build --if-present
+        env: 
+          DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
       - run: npm run lint
