@@ -10,10 +10,10 @@ import ButtonContainer from '../UI/Button/ButtonContainer.styled';
 import Image from 'next/image';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
-import ImageContainer from '../UI/Image/ImageContainer.styled';
 import InputFile from '../UI/Form/InputFile.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
 import CreateButton from '../Button/CreateButton';
+import ImageUploadText from '../UI/Form/ImageUploadText.styled';
 
 export default function Form() {
 	const [nameValue, setNameValue] = useState('');
@@ -79,34 +79,35 @@ export default function Form() {
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
 					<InputSingleContainer variant="upload">
-						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
-						<InputFile
-							id="image"
-							type="file"
-							aria-invalid={errors.image ? 'true' : 'false'}
-							{...register('image', {
-								required: true,
-							})}
-							onChange={event => {
-								uploadImage(event);
-							}}
-						/>
-						{errors.image && errors.image.type === 'required' && (
-							<span>please select a file</span>
-						)}
-						<ImageContainer>
+						<ImageUploadText>
+							<LabelUpload htmlFor="image">Image Upload</LabelUpload>
+							<InputFile
+								id="image"
+								type="file"
+								aria-invalid={errors.image ? 'true' : 'false'}
+								{...register('image', {
+									required: true,
+								})}
+								onChange={event => {
+									uploadImage(event);
+								}}
+							/>
+							{errors.image && errors.image.type === 'required' && (
+								<span>please select a file</span>
+							)}
 							<Typography variant="pUpload">
-								for best quality {'->'} please use upright images only
+								please use upright images only
 							</Typography>
-							<ImageWrapper variant="placeholder">
-								<Image
-									alt="placeholder"
-									src={previewImage.secure_url}
-									layout="fill"
-									objectFit="cover"
-								/>
-							</ImageWrapper>
-						</ImageContainer>
+						</ImageUploadText>
+
+						<ImageWrapper variant="placeholder">
+							<Image
+								alt="placeholder"
+								src={previewImage.secure_url}
+								layout="fill"
+								objectFit="cover"
+							/>
+						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="name">name</Label>

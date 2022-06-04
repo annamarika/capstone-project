@@ -59,9 +59,11 @@ const StyledP = styled.p`
 
 const StyledPUpload = styled.p`
 	color: var(--text-color-dark);
+	text-align: center;
 	text-transform: uppercase;
 	word-wrap: break-word;
-	width: 125px;
+	width: 140px;
+	padding: 15px;
 `;
 
 const StyledA = styled.a`

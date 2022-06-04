@@ -6,13 +6,13 @@ import DefaultButton from '../UI/Button/Button.styled';
 import ButtonContainer from '../UI/Button/ButtonContainer.styled';
 import FormContainer from '../UI/Form/FormContainer.styled';
 import FormElement from '../UI/Form/FormElement.styled';
+import ImageUploadText from '../UI/Form/ImageUploadText.styled';
 import Input from '../UI/Form/Input.styled';
 import InputContainer from '../UI/Form/InputContainer.styled';
 import InputFile from '../UI/Form/InputFile.styled';
 import InputSingleContainer from '../UI/Form/InputSingleContainer.styled';
 import Label from '../UI/Form/Lable.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
-import ImageContainer from '../UI/Image/ImageContainer.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
 
@@ -87,28 +87,23 @@ export default function ProductModeEdit({
 			<FormElement onSubmit={handleSubmit(onSubmit)}>
 				<InputContainer>
 					<InputSingleContainer variant="upload">
-						<LabelUpload htmlFor="image">Image Upload</LabelUpload>
-						<InputFile
-							id="image"
-							type="file"
-							{...register('image', {})}
-							onChange={event => {
-								uploadImage(event);
-							}}
-						/>
-						<ImageContainer>
+						<ImageUploadText>
+							<LabelUpload htmlFor="image">Image Upload</LabelUpload>
+							<InputFile
+								id="image"
+								type="file"
+								{...register('image', {})}
+								onChange={event => {
+									uploadImage(event);
+								}}
+							/>
 							<Typography variant="pUpload">
-								for best quality {'->'} please use upright images only
+								please use upright images only
 							</Typography>
-							<ImageWrapper variant="placeholder">
-								<Image
-									alt={title}
-									src={previewImage}
-									layout="fill"
-									objectFit="cover"
-								/>
-							</ImageWrapper>
-						</ImageContainer>
+						</ImageUploadText>
+						<ImageWrapper variant="placeholder">
+							<Image alt={title} src={previewImage} layout="fill" objectFit="cover" />
+						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="name">name</Label>
