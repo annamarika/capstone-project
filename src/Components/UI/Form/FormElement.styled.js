@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const FormElement = styled.form`
-	background-color: var(--main-bg-color-light);
-	border-radius: 50px;
-	height: 696px;
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 40px;
 	width: 90vw;
 `;
 

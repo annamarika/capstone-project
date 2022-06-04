@@ -1,29 +1,33 @@
 import styled, { keyframes, css } from 'styled-components';
 
 const enterLogoButtonStyle = keyframes`
-
-from {font-size: 30px;
+from {
+    font-size: 30px;
     opacity: 0;
 }
-to {font-size: 40px;
+to {
+    font-size: 40px;
     opacity: 1;
 }
 `;
 
 const updateLogoButtonStyle = keyframes`
-
-0% {font-size: 40px;
-    opacity: 0;}
-100% {font-size: 30px;
-    opacity: 1;}
+from {
+    font-size: 40px;
+    opacity: 0;
+}
+to {
+    font-size: 30px;
+    opacity: 1;
+}
 `;
 
 const LogoButtonStyle = styled.button`
 	font-size: 30px;
 	font-weight: 700;
-	color: white;
-	background-color: transparent;
-	align-item: center;
+	color: var(--accent-color);
+	background-color: var(--main-bg-color-dark);
+    padding: 5px;
 	border: none;
     animation: ${({ toggle }) =>
 		toggle

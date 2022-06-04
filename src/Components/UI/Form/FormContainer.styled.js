@@ -4,8 +4,9 @@ const FormContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	margin: 30px 10px 120px 10px;
+	margin: 120px 10px 120px 10px;
+	background-color: var(--main-bg-color-light);
+	border-radius: 50px;
 `;
 
 export default FormContainer;
