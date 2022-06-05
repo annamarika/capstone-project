@@ -1,3 +1,5 @@
+import Logo from '../src/Components/Logo/Logo';
+
 export default function Home() {
-	return <h1>startseite</h1>;
+	return <Logo />;
 }

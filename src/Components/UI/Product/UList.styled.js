@@ -5,7 +5,7 @@ const UList = styled.ul`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 100px;
+	margin: 100px 0 100px 0;
 `;
 
 export default UList;

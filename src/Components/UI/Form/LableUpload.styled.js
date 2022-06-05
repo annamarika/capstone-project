@@ -8,5 +8,6 @@ const LabelUpload = styled.label`
 	border: none;
 	border-radius: 19px;
 	padding: 7px 13px;
+	text-align: center;
 `;
 export default LabelUpload;
