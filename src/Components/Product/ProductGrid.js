@@ -15,10 +15,9 @@ export default function ProductGrid() {
 				<ProductLi key={product.id}>
 					<Product
 						id={product.id}
-						name={product.name}
+						user={product.user}
 						title={product.title}
 						detail={product.detail}
-						email={product.email}
 						image={product.image}
 					/>
 				</ProductLi>

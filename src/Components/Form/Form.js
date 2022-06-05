@@ -14,12 +14,12 @@ import InputFile from '../UI/Form/InputFile.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
 import CreateButton from '../Button/CreateButton';
 import ImageUploadText from '../UI/Form/ImageUploadText.styled';
+import { useSession } from 'next-auth/react';
 
 export default function Form() {
-	const [nameValue, setNameValue] = useState('');
+	const { data: session } = useSession();
 	const [titleValue, setTitleValue] = useState('');
 	const [detailValue, setDetailValue] = useState('');
-	const [emailValue, setEmailValue] = useState('');
 	const {
 		reset,
 		register,
@@ -62,10 +62,9 @@ export default function Form() {
 			method: 'POST',
 			body: JSON.stringify({
 				image: previewImage.secure_url,
-				name: nameValue,
+				user: session.user,
 				title: titleValue,
 				detail: detailValue,
-				email: emailValue,
 			}),
 		});
 
@@ -112,6 +111,7 @@ export default function Form() {
 					<InputSingleContainer>
 						<Label htmlFor="name">name</Label>
 						<Input
+							disabled
 							id="name"
 							type="text"
 							aria-invalid={errors.name ? 'true' : 'false'}
@@ -120,10 +120,7 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
-							placeholder="..."
-							onChange={event => {
-								setNameValue(event.target.value);
-							}}
+							value={session.user.name}
 						/>
 						{errors.name && errors.name.type === 'required' && (
 							<span>please enter your name</span>
@@ -187,6 +184,7 @@ export default function Form() {
 							email
 						</Label>
 						<Input
+							disabled
 							id="email"
 							type="email"
 							aria-invalid={errors.email ? 'true' : 'false'}
@@ -195,10 +193,7 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
-							placeholder="..."
-							onChange={event => {
-								setEmailValue(event.target.value);
-							}}
+							value={session.user.email}
 						/>
 						{errors.email && errors.email.type === 'required' && (
 							<span>please enter a valid email</span>
