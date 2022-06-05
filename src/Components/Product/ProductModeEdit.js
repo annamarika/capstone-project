@@ -163,7 +163,7 @@ export default function ProductModeEdit({ id, title, detail, image, onDisableEdi
 								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
-							value={user.name}
+							value={user.email}
 						/>
 					</InputSingleContainer>
 				</InputContainer>

@@ -12,11 +12,9 @@ export default async function handler(request, response) {
 				user = await User.create({ ...data.user });
 			}
 			const newProduct = await Product.create({
-				name: data.name,
 				image: data.image,
 				title: data.title,
 				detail: data.detail,
-				email: data.email,
 				user: user.id,
 			});
 			response.status(200).json({ message: 'product created', product: newProduct });
