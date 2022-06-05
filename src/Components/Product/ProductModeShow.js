@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
+import Bookmark from '../Bookmark/Bookmark';
 import DefaultButton from '../UI/Button/Button.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Container from '../UI/Product/Container.styled';
@@ -16,6 +17,7 @@ export default function ProductModeShow({
 	image,
 	altText,
 	onEnableEditMode,
+	isBookmarked,
 }) {
 	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
@@ -23,6 +25,7 @@ export default function ProductModeShow({
 	return (
 		<Container variant="product">
 			<ImageWrapper>
+				{asPath !== '/profile' && <Bookmark active={isBookmarked} />}
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>

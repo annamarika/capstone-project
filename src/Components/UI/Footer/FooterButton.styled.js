@@ -4,6 +4,7 @@ const FooterButton = styled.button`
 	background-color: ${props =>
 		props.href === props.pathName ? 'var(--button-bg-color)' : 'var(--main-bg-color)'};
 	width: 55px;
+	height: 55px;
 	border-radius: 50%;
 	padding: 5px;
 	border: none;
