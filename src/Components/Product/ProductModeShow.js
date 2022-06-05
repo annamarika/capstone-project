@@ -39,7 +39,7 @@ export default function ProductModeShow({
 						</Typography>
 					</DefaultButton>
 				)}
-				{asPath !== '/products' && (
+				{asPath === '/profile' && (
 					<DefaultButton
 						onClick={async () => {
 							const response = await fetch('/api/product/' + id, {
@@ -52,7 +52,7 @@ export default function ProductModeShow({
 						delete
 					</DefaultButton>
 				)}
-				{asPath !== '/products' && (
+				{asPath === '/profile' && (
 					<DefaultButton variant="hide" onClick={onEnableEditMode}>
 						edit
 					</DefaultButton>
