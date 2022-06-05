@@ -110,24 +110,7 @@ export default function Form() {
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="name">name</Label>
-						<Input
-							disabled
-							id="name"
-							type="text"
-							aria-invalid={errors.name ? 'true' : 'false'}
-							{...register('name', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 20,
-							})}
-							value={session.user.name}
-						/>
-						{errors.name && errors.name.type === 'required' && (
-							<span>please enter your name</span>
-						)}
-						{errors.name && errors.name.type === 'maxLength' && (
-							<span>Please use less than 20 characters</span>
-						)}
+						<Input disabled id="name" type="text" value={session.user.name} />
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">
@@ -183,24 +166,7 @@ export default function Form() {
 						<Label htmlFor="email" variant="headline">
 							email
 						</Label>
-						<Input
-							disabled
-							id="email"
-							type="email"
-							aria-invalid={errors.email ? 'true' : 'false'}
-							{...register('email', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 60,
-							})}
-							value={session.user.email}
-						/>
-						{errors.email && errors.email.type === 'required' && (
-							<span>please enter a valid email</span>
-						)}
-						{errors.email && errors.email.type === 'maxLength' && (
-							<span>Please use less than 60 characters</span>
-						)}
+						<Input disabled id="email" type="email" value={session.user.email} />
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>

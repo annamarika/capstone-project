@@ -16,19 +16,9 @@ import LabelUpload from '../UI/Form/LableUpload.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
 
-export default function ProductModeEdit({
-	id,
-	name,
-	title,
-	detail,
-	email,
-	image,
-	onDisableEditMode,
-}) {
-	const [nameValue, setNameValue] = useState(name);
+export default function ProductModeEdit({ id, title, detail, image, onDisableEditMode, user }) {
 	const [titleValue, setTitleValue] = useState(title);
 	const [detailValue, setDetailValue] = useState(detail);
-	const [emailValue, setEmailValue] = useState(email);
 	const { mutate } = useSWRConfig();
 	const {
 		setValue,
@@ -63,10 +53,8 @@ export default function ProductModeEdit({
 			method: 'PUT',
 			body: JSON.stringify({
 				image: previewImage,
-				name: nameValue,
 				title: titleValue,
 				detail: detailValue,
-				email: emailValue,
 			}),
 		});
 		console.log(await response.json());
@@ -75,11 +63,9 @@ export default function ProductModeEdit({
 		onDisableEditMode();
 	};
 	useEffect(() => {
-		setValue('name', name);
 		setValue('title', title);
 		setValue('detail', detail);
 		setValue('image', image);
-		setValue('email', email);
 	}, []);
 
 	return (
@@ -108,6 +94,7 @@ export default function ProductModeEdit({
 					<InputSingleContainer>
 						<Label htmlFor="name">name</Label>
 						<Input
+							disabled
 							id="name"
 							type="text"
 							aria-invalid={errors.name ? 'true' : 'false'}
@@ -116,16 +103,8 @@ export default function ProductModeEdit({
 								pattern: /\S(.*\S)?/,
 								maxLength: 20,
 							})}
-							onChange={event => {
-								setNameValue(event.target.value);
-							}}
+							value={user.name}
 						/>
-						{errors.name && errors.name.type === 'required' && (
-							<span>please enter your name</span>
-						)}
-						{errors.name && errors.name.type === 'maxLength' && (
-							<span>Please use less than 20 characters</span>
-						)}
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="title">title</Label>
@@ -175,6 +154,7 @@ export default function ProductModeEdit({
 					<InputSingleContainer>
 						<Label htmlFor="email">email</Label>
 						<Input
+							disabled
 							id="email"
 							type="email"
 							aria-invalid={errors.email ? 'true' : 'false'}
@@ -183,16 +163,8 @@ export default function ProductModeEdit({
 								pattern: /\S(.*\S)?/,
 								maxLength: 60,
 							})}
-							onChange={event => {
-								setEmailValue(event.target.value);
-							}}
+							value={user.name}
 						/>
-						{errors.email && errors.email.type === 'required' && (
-							<span>please enter a valid email</span>
-						)}
-						{errors.email && errors.email.type === 'maxLength' && (
-							<span>Please use less than 60 characters</span>
-						)}
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>

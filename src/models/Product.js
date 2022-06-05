@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+// eslint-disable-next-line no-unused-vars
+import User from './User';
 
 const productSchema = new Schema(
 	{
