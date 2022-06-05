@@ -7,7 +7,6 @@ import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Container from '../UI/Product/Container.styled';
 import TextWrapper from '../UI/Product/TextWrapper.styled';
 import Typography from '../UI/Typography';
-import { useSession } from 'next-auth/react';
 
 export default function ProductModeShow({
 	id,
@@ -21,7 +20,6 @@ export default function ProductModeShow({
 }) {
 	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
-	const { data: session } = useSession();
 
 	return (
 		<Container variant="product">
@@ -40,7 +38,7 @@ export default function ProductModeShow({
 						</Typography>
 					</DefaultButton>
 				)}
-				{session && session.user.email === user.email && (
+				{asPath === '/profile' && (
 					<>
 						<DefaultButton
 							onClick={async () => {
