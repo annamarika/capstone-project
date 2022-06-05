@@ -7,9 +7,9 @@ export default async function handler(request, response) {
 		try {
 			const data = JSON.parse(request.body);
 			await dbConnect();
-			let user = await User.findOne({ name: data.name });
+			let user = await User.findOne({ email: data.user.email });
 			if (!user) {
-				user = await User.create({ name: data.name });
+				user = await User.create({ ...data.user });
 			}
 			const newProduct = await Product.create({
 				name: data.name,
@@ -17,6 +17,7 @@ export default async function handler(request, response) {
 				title: data.title,
 				detail: data.detail,
 				email: data.email,
+				user: user.id,
 			});
 			response.status(200).json({ message: 'product created', product: newProduct });
 		} catch (error) {

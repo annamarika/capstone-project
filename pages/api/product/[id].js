@@ -1,7 +1,10 @@
+import { dbConnect } from '../../../src/Components/lib/database';
 import Product from '../../../src/models/Product';
 
 export default async function handler(request, response) {
 	const { id } = request.query;
+
+	await dbConnect();
 
 	if (request.method === 'DELETE') {
 		try {

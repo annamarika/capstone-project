@@ -5,12 +5,15 @@ export const getProducts = async () => {
 	await dbConnect();
 	const data = await Product.find();
 
-	return data.map(({ id, image, name, title, detail, email }) => ({
+	return data.map(({ id, image, title, detail, user }) => ({
 		id,
 		image,
-		name,
 		title,
 		detail,
-		email,
+		user: {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+		},
 	}));
 };

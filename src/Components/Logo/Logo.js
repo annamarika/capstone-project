@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import LogoButtonStyle from '../UI/Button/LogoButton.styled';
+import AccountButton from '../Button/AccountButton';
 import Bottom from '../UI/Logo/LogoBottom.styled';
 import BottomDecorate from '../UI/Logo/LogoBottomDecorate.styled';
 import LogoContainer from '../UI/Logo/LogoContainer.styled';
@@ -20,13 +20,11 @@ export default function Logo() {
 
 			<Bottom toggle={toggle}>
 				<BottomDecorate toggle={toggle}>
-					<LogoButtonStyle
+					<AccountButton
 						toggle={toggle}
 						type="button"
 						onClick={() => setToggle(!toggle)}
-					>
-						{toggle ? 'OPEN' : 'CLOSE'}
-					</LogoButtonStyle>
+					/>
 				</BottomDecorate>
 			</Bottom>
 			<LegsContainer toggle={toggle}>
