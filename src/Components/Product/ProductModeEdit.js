@@ -13,10 +13,11 @@ import InputFile from '../UI/Form/InputFile.styled';
 import InputSingleContainer from '../UI/Form/InputSingleContainer.styled';
 import Label from '../UI/Form/Lable.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
+import Textarea from '../UI/Form/Textarea.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
 
-export default function ProductModeEdit({ id, title, detail, image, onDisableEditMode, user }) {
+export default function ProductModeEdit({ id, title, detail, image, onDisableEditMode }) {
 	const [titleValue, setTitleValue] = useState(title);
 	const [detailValue, setDetailValue] = useState(detail);
 	const { mutate } = useSWRConfig();
@@ -92,22 +93,7 @@ export default function ProductModeEdit({ id, title, detail, image, onDisableEdi
 						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="name">name</Label>
-						<Input
-							disabled
-							id="name"
-							type="text"
-							aria-invalid={errors.name ? 'true' : 'false'}
-							{...register('name', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 20,
-							})}
-							value={user.name}
-						/>
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="title">title</Label>
+						<Label htmlFor="title">category</Label>
 						<Input
 							id="title"
 							type="text"
@@ -131,7 +117,7 @@ export default function ProductModeEdit({ id, title, detail, image, onDisableEdi
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="detail">detail</Label>
-						<Input
+						<Textarea
 							id="detail"
 							type="text"
 							aria-invalid={errors.detail ? 'true' : 'false'}
@@ -150,21 +136,6 @@ export default function ProductModeEdit({ id, title, detail, image, onDisableEdi
 						{errors.detail && errors.detail.type === 'maxLength' && (
 							<span>Please use less than 170 characters</span>
 						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="email">email</Label>
-						<Input
-							disabled
-							id="email"
-							type="email"
-							aria-invalid={errors.email ? 'true' : 'false'}
-							{...register('email', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 60,
-							})}
-							value={user.email}
-						/>
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>

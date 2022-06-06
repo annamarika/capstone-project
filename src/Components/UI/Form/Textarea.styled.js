@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
 
-const Input = styled.input`
+const Textarea = styled.textarea`
 	text-transform: uppercase;
 	background-color: var(--main-bg-color-dark);
 	color: var(--text-color-light);
 	border: none;
-	height: 38px;
+	height: 100px;
 	border-radius: 19px;
 	padding: 10px;
+	resize: none;
 
 	:focus {
 		outline: solid 3px var(--accent-color);
@@ -15,9 +16,9 @@ const Input = styled.input`
 
 	::placeholder {
 		color: var(--text-color-light);
-		opacity: 1;
+		opacity: 0.5;
 	}
 	${({ variant }) => variant === 'detail' && css``}
 `;
 
-export default Input;
+export default Textarea;

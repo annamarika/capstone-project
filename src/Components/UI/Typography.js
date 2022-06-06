@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export default function Typography({ children, variant, component, ...rest }) {
 	switch (variant) {
@@ -27,6 +27,12 @@ export default function Typography({ children, variant, component, ...rest }) {
 					{children}
 				</StyledPUpload>
 			);
+		case 'username':
+			return (
+				<StyledUsername {...rest} as={component}>
+					{children}
+				</StyledUsername>
+			);
 		case 'a':
 			return (
 				<StyledA {...rest} as={component}>
@@ -35,6 +41,16 @@ export default function Typography({ children, variant, component, ...rest }) {
 			);
 	}
 }
+
+const StyledUsername = styled.p`
+	color: var(--text-color-light);
+	background-color: var(--text-color-dark);
+	text-transform: uppercase;
+	word-wrap: break-word;
+	align-text: center;
+	padding: 5px;
+	border-radius: 15px;
+`;
 
 const StyledH1 = styled.h1`
 	color: var(--text-color-dark);
@@ -55,6 +71,21 @@ const StyledP = styled.p`
 	border-bottom: solid 3px #db6c4c;
 	word-wrap: break-word;
 	text-decoration: none;
+
+	${({ border }) =>
+		border === 'none' &&
+		css`
+			border-bottom: none;
+			padding-bottom: 0;
+		`}
+
+	${({ color }) =>
+		color === 'white' &&
+		css`
+			color: var(--text-color-light);
+			border-bottom: none;
+			padding-bottom: 0;
+		`}
 `;
 
 const StyledPUpload = styled.p`

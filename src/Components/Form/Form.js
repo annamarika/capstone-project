@@ -15,6 +15,7 @@ import LabelUpload from '../UI/Form/LableUpload.styled';
 import CreateButton from '../Button/CreateButton';
 import ImageUploadText from '../UI/Form/ImageUploadText.styled';
 import { useSession } from 'next-auth/react';
+import Textarea from '../UI/Form/Textarea.styled';
 
 export default function Form() {
 	const { data: session } = useSession();
@@ -109,12 +110,8 @@ export default function Form() {
 						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="name">name</Label>
-						<Input disabled id="name" type="text" value={session.user.name} />
-					</InputSingleContainer>
-					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">
-							title
+							category
 						</Label>
 						<Input
 							id="title"
@@ -141,7 +138,10 @@ export default function Form() {
 						<Label htmlFor="detail" variant="headline">
 							detail
 						</Label>
-						<Input
+						<Textarea
+							rows="5"
+							cols="60"
+							variant="detail"
 							id="detail"
 							type="text"
 							aria-invalid={errors.detail ? 'true' : 'false'}
@@ -150,7 +150,7 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
-							placeholder="..."
+							placeholder="size, location, status ... "
 							onChange={event => {
 								setDetailValue(event.target.value);
 							}}
@@ -161,12 +161,6 @@ export default function Form() {
 						{errors.detail && errors.detail.type === 'maxLength' && (
 							<span>Please use less than 170 characters</span>
 						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="email" variant="headline">
-							email
-						</Label>
-						<Input disabled id="email" type="email" value={session.user.email} />
 					</InputSingleContainer>
 				</InputContainer>
 				<ButtonContainer>

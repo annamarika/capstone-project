@@ -28,7 +28,7 @@ export default function ProductModeShow({
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
-				<Typography variant="p">{user.name}</Typography>
+				{asPath !== '/profile' && <Typography variant="username">{user.name}</Typography>}
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
 				{asPath !== '/profile' && (

@@ -6,6 +6,7 @@ const FooterContainer = styled.footer`
 	position: fixed;
 	left: 0px;
 	bottom: 0;
+	z-index: 20;
 `;
 
 export default FooterContainer;
