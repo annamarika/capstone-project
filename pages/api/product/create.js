@@ -16,6 +16,7 @@ export default async function handler(request, response) {
 				title: data.title,
 				detail: data.detail,
 				user: user.id,
+				bookmark: data.bookmark,
 			});
 			response.status(200).json({ message: 'product created', product: newProduct });
 		} catch (error) {

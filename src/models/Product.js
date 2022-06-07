@@ -9,6 +9,7 @@ const productSchema = new Schema(
 		image: { type: String, required: true },
 		title: { type: String, required: true },
 		detail: { type: String, required: true },
+		bookmark: { type: Boolean, required: true },
 	},
 	{
 		timestamps: true,

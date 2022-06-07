@@ -21,6 +21,7 @@ export default function Form() {
 	const { data: session } = useSession();
 	const [titleValue, setTitleValue] = useState('');
 	const [detailValue, setDetailValue] = useState('');
+	const [bookmarkValue, setBookmarkValue] = useState(false);
 	const {
 		reset,
 		register,
@@ -66,9 +67,11 @@ export default function Form() {
 				user: session.user,
 				title: titleValue,
 				detail: detailValue,
+				bookmark: bookmarkValue,
 			}),
 		});
-
+		setBookmarkValue(bookmarkValue);
+		console.log(bookmarkValue);
 		console.log(await response.json());
 		data.image = previewImage.secure_url;
 		reset();

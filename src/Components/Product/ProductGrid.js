@@ -27,6 +27,7 @@ export default function ProductGrid({ session }) {
 						title={product.title}
 						detail={product.detail}
 						image={product.image}
+						bookmark={product.bookmark}
 					/>
 				</ProductLi>
 			))}

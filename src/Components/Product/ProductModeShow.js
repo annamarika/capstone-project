@@ -7,6 +7,7 @@ import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Container from '../UI/Product/Container.styled';
 import TextWrapper from '../UI/Product/TextWrapper.styled';
 import Typography from '../UI/Typography';
+import { useSession } from 'next-auth/react';
 
 export default function ProductModeShow({
 	id,
@@ -15,23 +16,25 @@ export default function ProductModeShow({
 	image,
 	altText,
 	user,
+	bookmark,
 	onEnableEditMode,
 	isBookmarked,
 }) {
 	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
+	const { data: session } = useSession();
 
 	return (
 		<Container variant="product">
 			<ImageWrapper>
-				{asPath !== '/profile' && <Bookmark active={isBookmarked} />}
+				{asPath !== '/profile' && <Bookmark active={isBookmarked(bookmark)} />}
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
 				{asPath !== '/profile' && <Typography variant="username">{user.name}</Typography>}
 				<Typography variant="p">{title}</Typography>
 				<Typography variant="p">{detail}</Typography>
-				{asPath !== '/profile' && (
+				{asPath !== '/profile' && session && (
 					<DefaultButton>
 						<Typography href={`mailto:${user.email}`} variant="a">
 							email
