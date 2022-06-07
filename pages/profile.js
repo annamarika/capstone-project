@@ -17,12 +17,12 @@ export async function getStaticProps() {
 	};
 }
 
-export default function Products({ fallback }, user) {
+export default function Products({ fallback }) {
 	const { data: session } = useSession();
 	return (
 		<SWRConfig value={{ fetcher: swrFetcher, fallback }}>
 			<Profile />
-			{session && session.user.email !== user.email && <ProductGrid />}
+			{session && <ProductGrid session={session} />}
 		</SWRConfig>
 	);
 }

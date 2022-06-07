@@ -11,8 +11,7 @@ export default function Profile() {
 		return (
 			<ProfileContainer>
 				<Typography variant="p" border="none">
-					{' '}
-					Signed in as{' '}
+					Signed in as
 				</Typography>
 				<Typography variant="username"> {session.user.name} </Typography>
 
@@ -28,5 +27,20 @@ export default function Profile() {
 			</ProfileContainer>
 		);
 	}
-	return <Typography variant="p"> please sign in </Typography>;
+	return (
+		<ProfileContainer>
+			<Typography variant="p" border="none">
+				please sign in
+			</Typography>
+			<LinkContainer>
+				<Link passHref href="/">
+					<Typography variant="a" pathName={Router.pathname}>
+						<Typography variant="p" color="white">
+							sign in?
+						</Typography>
+					</Typography>
+				</Link>
+			</LinkContainer>
+		</ProfileContainer>
+	);
 }
