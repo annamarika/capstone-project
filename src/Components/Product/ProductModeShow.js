@@ -26,7 +26,7 @@ export default function ProductModeShow({
 	return (
 		<Container variant="product">
 			<ImageWrapper>
-				{asPath !== '/profile' && <Bookmark active={bookmark} />}
+				{asPath !== '/profile' && <Bookmark active={bookmark} id={id} />}
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
