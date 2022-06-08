@@ -3,9 +3,17 @@ import MySVG from '../UI/MySVG';
 import BookmarkInput from '../UI/Bookmark/BookmarkInput.styled';
 import BookmarkContainer from '../UI/Bookmark/BookmarkContainer.styled';
 
-export default function Bookmark({ active, ...otherProps }) {
+export default function Bookmark({ active, ...otherProps }, id) {
 	const [checked, setChecked] = useState(false);
-	const handleChange = () => {
+	const handleChange = async () => {
+		const response = await fetch('/api/bookmark/' + id, {
+			method: 'PUT',
+			body: JSON.stringify({
+				bookmark: checked,
+			}),
+		});
+
+		console.log(await response.json());
 		setChecked(!checked);
 	};
 

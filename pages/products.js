@@ -5,7 +5,6 @@ import { SWRConfig } from 'swr';
 
 export async function getStaticProps() {
 	const products = await getProducts();
-	/*const allProducts = JSON.stringify(products);*/
 
 	return {
 		props: {

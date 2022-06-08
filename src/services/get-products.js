@@ -10,7 +10,7 @@ export const getProducts = async () => {
 		image,
 		title,
 		detail,
-		bookmark,
+		bookmark: Boolean(bookmark),
 		user: {
 			id: user.id,
 			name: user.name,
@@ -18,3 +18,17 @@ export const getProducts = async () => {
 		},
 	}));
 };
+
+/*const animals = await Animal.find();
+console.log('getAnimals: ', animals);
+
+return animals.map(({ id, name, spotsRef, description, wiki }) => {
+	spotsRef = spotsRef.map(spotId => spotId.toString());
+	return {
+		id,
+		name,
+		spotsRef,
+		description,
+		wiki,
+	};
+});*/

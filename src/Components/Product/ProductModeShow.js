@@ -18,7 +18,6 @@ export default function ProductModeShow({
 	user,
 	bookmark,
 	onEnableEditMode,
-	isBookmarked,
 }) {
 	const { mutate } = useSWRConfig();
 	const { asPath } = useRouter();
@@ -27,7 +26,7 @@ export default function ProductModeShow({
 	return (
 		<Container variant="product">
 			<ImageWrapper>
-				{asPath !== '/profile' && <Bookmark active={isBookmarked(bookmark)} />}
+				{asPath !== '/profile' && <Bookmark active={bookmark} />}
 				<Image src={image} alt={altText} layout="fill" objectFit="cover" />
 			</ImageWrapper>
 			<TextWrapper>
