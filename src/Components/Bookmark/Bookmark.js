@@ -5,20 +5,20 @@ import BookmarkInput from '../UI/Bookmark/BookmarkInput.styled';
 import BookmarkContainer from '../UI/Bookmark/BookmarkContainer.styled';
 
 export default function Bookmark({ id, active, ...otherProps }) {
-	const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(active);
 	const { mutate } = useSWRConfig();
-	console.log(id);
+
 	const handleChange = async () => {
 		const response = await fetch('/api/bookmark/' + id, {
 			method: 'PUT',
 			body: JSON.stringify({
-				bookmark: checked,
+				bookmark: !checked,
 			}),
 		});
 
 		console.log(await response.json());
-		mutate('/api/products');
 		setChecked(!checked);
+		mutate('/api/products');
 	};
 
 	return (
@@ -27,8 +27,11 @@ export default function Bookmark({ id, active, ...otherProps }) {
 				type="checkbox"
 				active={active}
 				{...otherProps}
-				onChange={handleChange}
+				onChange={() => {
+					handleChange();
+				}}
 			/>
+
 			<BookmarkContainer>
 				<MySVG
 					variant="bookmark"
