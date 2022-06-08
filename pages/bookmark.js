@@ -1,7 +1,7 @@
 import { getProducts } from '../src/services/get-products';
-import ProductGrid from '../src/Components/Product/ProductGrid';
 import { swrFetcher } from '../src/Components/lib/swr-fetcher';
 import { SWRConfig } from 'swr';
+import ProductGridBookmark from '../src/Components/Product/ProductGirdBookmark';
 
 export async function getStaticProps() {
 	const products = await getProducts();
@@ -18,7 +18,7 @@ export async function getStaticProps() {
 export default function Products({ fallback }) {
 	return (
 		<SWRConfig value={{ fetcher: swrFetcher, fallback }}>
-			<ProductGrid />
+			<ProductGridBookmark />
 		</SWRConfig>
 	);
 }

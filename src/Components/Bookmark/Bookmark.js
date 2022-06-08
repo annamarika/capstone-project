@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useSWRConfig } from 'swr';
 import MySVG from '../UI/MySVG';
 import BookmarkInput from '../UI/Bookmark/BookmarkInput.styled';
 import BookmarkContainer from '../UI/Bookmark/BookmarkContainer.styled';
 
-export default function Bookmark({ active, ...otherProps }, id) {
+export default function Bookmark({ id, active, ...otherProps }) {
 	const [checked, setChecked] = useState(false);
+	const { mutate } = useSWRConfig();
+	console.log(id);
 	const handleChange = async () => {
 		const response = await fetch('/api/bookmark/' + id, {
 			method: 'PUT',
@@ -14,6 +17,7 @@ export default function Bookmark({ active, ...otherProps }, id) {
 		});
 
 		console.log(await response.json());
+		mutate('/api/products');
 		setChecked(!checked);
 	};
 

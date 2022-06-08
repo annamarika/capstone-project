@@ -5,13 +5,11 @@ import useSWR from 'swr';
 import Typography from '../UI/Typography';
 import { useRouter } from 'next/router';
 
-export default function ProductGridBookmark({ session }) {
+export default function ProductGridBookmark() {
 	const { data, error } = useSWR('/api/products');
 	const { asPath } = useRouter();
-	const loginData =
-		asPath === '/bookmark'
-			? data.filter(product => product.user.email === session.user.email)
-			: data;
+	const bookmarkData =
+		asPath === '/bookmark' ? data.filter(product => product.bookmark === true) : '';
 
 	if (error) {
 		return <Typography variant="p">Error: {error.message}</Typography>;
@@ -19,7 +17,7 @@ export default function ProductGridBookmark({ session }) {
 
 	return (
 		<UList>
-			{loginData.map(product => (
+			{bookmarkData.map(product => (
 				<ProductLi key={product.id}>
 					<Product
 						id={product.id}
