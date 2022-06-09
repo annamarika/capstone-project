@@ -9,16 +9,20 @@ export default function Bookmark({ id, active, ...otherProps }) {
 	const { mutate } = useSWRConfig();
 
 	const handleChange = async () => {
-		const response = await fetch('/api/bookmark/' + id, {
-			method: 'PUT',
-			body: JSON.stringify({
-				bookmark: !checked,
-			}),
-		});
-
-		console.log(await response.json());
-		setChecked(!checked);
-		mutate('/api/products');
+		try {
+			const response = await fetch('/api/bookmark/' + id, {
+				method: 'PUT',
+				body: JSON.stringify({
+					bookmark: !checked,
+				}),
+			});
+			const data = await response.json();
+			setChecked(!checked);
+			mutate('/api/products');
+			return data;
+		} catch (error) {
+			console.error(`Ooops we had an error: ${error}`);
+		}
 	};
 
 	return (

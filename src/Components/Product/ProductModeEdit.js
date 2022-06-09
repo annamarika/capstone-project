@@ -49,20 +49,27 @@ export default function ProductModeEdit({ id, title, detail, image, onDisableEdi
 			console.error(error.message);
 		}
 	};
+
 	const onSubmit = async data => {
-		const response = await fetch('/api/product/' + id, {
-			method: 'PUT',
-			body: JSON.stringify({
-				image: previewImage,
-				title: titleValue,
-				detail: detailValue,
-			}),
-		});
-		console.log(await response.json());
-		mutate('/api/products');
-		data.image = previewImage;
-		onDisableEditMode();
+		try {
+			const response = await fetch('/api/product/' + id, {
+				method: 'PUT',
+				body: JSON.stringify({
+					image: previewImage,
+					title: titleValue,
+					detail: detailValue,
+				}),
+			});
+			const dataerror = await response.json();
+			mutate('/api/products');
+			data.image = previewImage;
+			onDisableEditMode();
+			return dataerror;
+		} catch (error) {
+			console.error(`Ooops we had an error: ${error}`);
+		}
 	};
+
 	useEffect(() => {
 		setValue('title', title);
 		setValue('detail', detail);

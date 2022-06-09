@@ -60,21 +60,25 @@ export default function Form() {
 	};
 
 	const onSubmit = async data => {
-		const response = await fetch('/api/product/create/', {
-			method: 'POST',
-			body: JSON.stringify({
-				image: previewImage.secure_url,
-				user: session.user,
-				title: titleValue,
-				detail: detailValue,
-				bookmark: bookmarkValue,
-			}),
-		});
-		setBookmarkValue(bookmarkValue);
-		console.log(bookmarkValue);
-		console.log(await response.json());
-		data.image = previewImage.secure_url;
-		reset();
+		try {
+			const response = await fetch('/api/product/create/', {
+				method: 'POST',
+				body: JSON.stringify({
+					image: previewImage.secure_url,
+					user: session.user,
+					title: titleValue,
+					detail: detailValue,
+					bookmark: bookmarkValue,
+				}),
+			});
+			reset();
+			const dataerror = await response.json();
+			setBookmarkValue(bookmarkValue);
+			data.image = previewImage.secure_url;
+			return dataerror;
+		} catch (error) {
+			console.error(`Ooops we had an error: ${error}`);
+		}
 	};
 
 	return (

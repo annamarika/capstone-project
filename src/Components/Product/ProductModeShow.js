@@ -44,11 +44,16 @@ export default function ProductModeShow({
 					<>
 						<DefaultButton
 							onClick={async () => {
-								const response = await fetch('/api/product/' + id, {
-									method: 'DELETE',
-								});
-								console.log(await response.json());
-								mutate('/api/products');
+								try {
+									const response = await fetch('/api/product/' + id, {
+										method: 'DELETE',
+									});
+									const data = await response.json();
+									mutate('/api/products');
+									return data;
+								} catch (error) {
+									console.error(`Ooops we had an error: ${error}`);
+								}
 							}}
 						>
 							delete

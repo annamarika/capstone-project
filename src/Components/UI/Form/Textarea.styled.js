@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Textarea = styled.textarea`
 	text-transform: uppercase;
@@ -18,7 +18,6 @@ const Textarea = styled.textarea`
 		color: var(--text-color-light);
 		opacity: 0.5;
 	}
-	${({ variant }) => variant === 'detail' && css``}
 `;
 
 export default Textarea;

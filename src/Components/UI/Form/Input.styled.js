@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Input = styled.input`
 	text-transform: uppercase;
@@ -17,7 +17,6 @@ const Input = styled.input`
 		color: var(--text-color-light);
 		opacity: 1;
 	}
-	${({ variant }) => variant === 'detail' && css``}
 `;
 
 export default Input;
