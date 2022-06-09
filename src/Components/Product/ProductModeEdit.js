@@ -13,22 +13,13 @@ import InputFile from '../UI/Form/InputFile.styled';
 import InputSingleContainer from '../UI/Form/InputSingleContainer.styled';
 import Label from '../UI/Form/Lable.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
+import Textarea from '../UI/Form/Textarea.styled';
 import ImageWrapper from '../UI/Image/ImageWrapper.styled';
 import Typography from '../UI/Typography';
 
-export default function ProductModeEdit({
-	id,
-	name,
-	title,
-	detail,
-	email,
-	image,
-	onDisableEditMode,
-}) {
-	const [nameValue, setNameValue] = useState(name);
+export default function ProductModeEdit({ id, title, detail, image, onDisableEditMode }) {
 	const [titleValue, setTitleValue] = useState(title);
 	const [detailValue, setDetailValue] = useState(detail);
-	const [emailValue, setEmailValue] = useState(email);
 	const { mutate } = useSWRConfig();
 	const {
 		setValue,
@@ -58,28 +49,31 @@ export default function ProductModeEdit({
 			console.error(error.message);
 		}
 	};
+
 	const onSubmit = async data => {
-		const response = await fetch('/api/product/' + id, {
-			method: 'PUT',
-			body: JSON.stringify({
-				image: previewImage,
-				name: nameValue,
-				title: titleValue,
-				detail: detailValue,
-				email: emailValue,
-			}),
-		});
-		console.log(await response.json());
-		mutate('/api/products');
-		data.image = previewImage;
-		onDisableEditMode();
+		try {
+			const response = await fetch('/api/product/' + id, {
+				method: 'PUT',
+				body: JSON.stringify({
+					image: previewImage,
+					title: titleValue,
+					detail: detailValue,
+				}),
+			});
+			const dataerror = await response.json();
+			mutate('/api/products');
+			data.image = previewImage;
+			onDisableEditMode();
+			return dataerror;
+		} catch (error) {
+			console.error(`Ooops we had an error: ${error}`);
+		}
 	};
+
 	useEffect(() => {
-		setValue('name', name);
 		setValue('title', title);
 		setValue('detail', detail);
 		setValue('image', image);
-		setValue('email', email);
 	}, []);
 
 	return (
@@ -106,29 +100,7 @@ export default function ProductModeEdit({
 						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="name">name</Label>
-						<Input
-							id="name"
-							type="text"
-							aria-invalid={errors.name ? 'true' : 'false'}
-							{...register('name', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 20,
-							})}
-							onChange={event => {
-								setNameValue(event.target.value);
-							}}
-						/>
-						{errors.name && errors.name.type === 'required' && (
-							<span>please enter your name</span>
-						)}
-						{errors.name && errors.name.type === 'maxLength' && (
-							<span>Please use less than 20 characters</span>
-						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="title">title</Label>
+						<Label htmlFor="title">category</Label>
 						<Input
 							id="title"
 							type="text"
@@ -152,7 +124,7 @@ export default function ProductModeEdit({
 					</InputSingleContainer>
 					<InputSingleContainer>
 						<Label htmlFor="detail">detail</Label>
-						<Input
+						<Textarea
 							id="detail"
 							type="text"
 							aria-invalid={errors.detail ? 'true' : 'false'}
@@ -170,28 +142,6 @@ export default function ProductModeEdit({
 						)}
 						{errors.detail && errors.detail.type === 'maxLength' && (
 							<span>Please use less than 170 characters</span>
-						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="email">email</Label>
-						<Input
-							id="email"
-							type="email"
-							aria-invalid={errors.email ? 'true' : 'false'}
-							{...register('email', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 60,
-							})}
-							onChange={event => {
-								setEmailValue(event.target.value);
-							}}
-						/>
-						{errors.email && errors.email.type === 'required' && (
-							<span>please enter a valid email</span>
-						)}
-						{errors.email && errors.email.type === 'maxLength' && (
-							<span>Please use less than 60 characters</span>
 						)}
 					</InputSingleContainer>
 				</InputContainer>

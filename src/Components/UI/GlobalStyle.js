@@ -15,6 +15,7 @@ html {
   body {  
     background-color: #E2CADF;
     font-size: 1.5rem;
+    
   }
   
   :root {

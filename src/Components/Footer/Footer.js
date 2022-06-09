@@ -22,9 +22,9 @@ export default function Footer() {
 						<MySVG size="34" variant="add" />
 					</FooterButton>
 				</Link>
-				<Link passHref href="/profile">
-					<FooterButton type="button" pathName={router.pathname}>
-						<MySVG size="34" variant="profile" />
+				<Link passHref href="/bookmark">
+					<FooterButton pathName={router.pathname}>
+						<MySVG size="24" variant="bookmark" />
 					</FooterButton>
 				</Link>
 			</FooterNav>

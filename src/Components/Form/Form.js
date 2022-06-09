@@ -14,12 +14,14 @@ import InputFile from '../UI/Form/InputFile.styled';
 import LabelUpload from '../UI/Form/LableUpload.styled';
 import CreateButton from '../Button/CreateButton';
 import ImageUploadText from '../UI/Form/ImageUploadText.styled';
+import { useSession } from 'next-auth/react';
+import Textarea from '../UI/Form/Textarea.styled';
 
 export default function Form() {
-	const [nameValue, setNameValue] = useState('');
+	const { data: session } = useSession();
 	const [titleValue, setTitleValue] = useState('');
 	const [detailValue, setDetailValue] = useState('');
-	const [emailValue, setEmailValue] = useState('');
+	const [bookmarkValue, setBookmarkValue] = useState(false);
 	const {
 		reset,
 		register,
@@ -58,20 +60,25 @@ export default function Form() {
 	};
 
 	const onSubmit = async data => {
-		const response = await fetch('/api/product/create/', {
-			method: 'POST',
-			body: JSON.stringify({
-				image: previewImage.secure_url,
-				name: nameValue,
-				title: titleValue,
-				detail: detailValue,
-				email: emailValue,
-			}),
-		});
-
-		console.log(await response.json());
-		data.image = previewImage.secure_url;
-		reset();
+		try {
+			const response = await fetch('/api/product/create/', {
+				method: 'POST',
+				body: JSON.stringify({
+					image: previewImage.secure_url,
+					user: session.user,
+					title: titleValue,
+					detail: detailValue,
+					bookmark: bookmarkValue,
+				}),
+			});
+			reset();
+			const dataerror = await response.json();
+			setBookmarkValue(bookmarkValue);
+			data.image = previewImage.secure_url;
+			return dataerror;
+		} catch (error) {
+			console.error(`Ooops we had an error: ${error}`);
+		}
 	};
 
 	return (
@@ -110,31 +117,8 @@ export default function Form() {
 						</ImageWrapper>
 					</InputSingleContainer>
 					<InputSingleContainer>
-						<Label htmlFor="name">name</Label>
-						<Input
-							id="name"
-							type="text"
-							aria-invalid={errors.name ? 'true' : 'false'}
-							{...register('name', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 20,
-							})}
-							placeholder="..."
-							onChange={event => {
-								setNameValue(event.target.value);
-							}}
-						/>
-						{errors.name && errors.name.type === 'required' && (
-							<span>please enter your name</span>
-						)}
-						{errors.name && errors.name.type === 'maxLength' && (
-							<span>Please use less than 20 characters</span>
-						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
 						<Label htmlFor="title" variant="headline">
-							title
+							category
 						</Label>
 						<Input
 							id="title"
@@ -161,7 +145,10 @@ export default function Form() {
 						<Label htmlFor="detail" variant="headline">
 							detail
 						</Label>
-						<Input
+						<Textarea
+							rows="5"
+							cols="60"
+							variant="detail"
 							id="detail"
 							type="text"
 							aria-invalid={errors.detail ? 'true' : 'false'}
@@ -170,7 +157,7 @@ export default function Form() {
 								pattern: /\S(.*\S)?/,
 								maxLength: 170,
 							})}
-							placeholder="..."
+							placeholder="size, location, status ... "
 							onChange={event => {
 								setDetailValue(event.target.value);
 							}}
@@ -180,31 +167,6 @@ export default function Form() {
 						)}
 						{errors.detail && errors.detail.type === 'maxLength' && (
 							<span>Please use less than 170 characters</span>
-						)}
-					</InputSingleContainer>
-					<InputSingleContainer>
-						<Label htmlFor="email" variant="headline">
-							email
-						</Label>
-						<Input
-							id="email"
-							type="email"
-							aria-invalid={errors.email ? 'true' : 'false'}
-							{...register('email', {
-								required: true,
-								pattern: /\S(.*\S)?/,
-								maxLength: 60,
-							})}
-							placeholder="..."
-							onChange={event => {
-								setEmailValue(event.target.value);
-							}}
-						/>
-						{errors.email && errors.email.type === 'required' && (
-							<span>please enter a valid email</span>
-						)}
-						{errors.email && errors.email.type === 'maxLength' && (
-							<span>Please use less than 60 characters</span>
 						)}
 					</InputSingleContainer>
 				</InputContainer>

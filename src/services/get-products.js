@@ -3,14 +3,18 @@ import Product from '../models/Product';
 
 export const getProducts = async () => {
 	await dbConnect();
-	const data = await Product.find();
+	const products = await Product.find().populate('user');
 
-	return data.map(({ id, image, name, title, detail, email }) => ({
+	return products.map(({ id, image, title, detail, user, bookmark }) => ({
 		id,
 		image,
-		name,
 		title,
 		detail,
-		email,
+		bookmark,
+		user: {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+		},
 	}));
 };
